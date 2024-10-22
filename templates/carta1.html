@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZND42296P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9ZND42296P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Shop Modern - Servicios</title>
+
+    <!-- Incluir fuente vintage desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 48px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .logo img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 40px;
+            filter: grayscale(100%);
+        }
+
+        .services {
+            font-family: 'Cinzel', serif;
+            background-color: #f9f9f9;
+            border: 2px solid #000000;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .services h2 {
+            text-transform: uppercase;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .services ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .services li {
+            font-size: 20px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .services li span {
+            font-weight: bold;
+        }
+
+        .footer {
+            position: relative;
+            width: 100%;
+        }
+
+        .stripe-bar {
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #000000 50%, #ffffff 50%);
+            margin-top: 40px;
+        }
+
+        .image-container {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+
+        /* Estilos para pantallas grandes (a partir de 768px) */
+        @media (min-width: 768px) {
+            .header h1 {
+                font-size: 56px;
+                margin-top: 20px;
+            }
+
+            .logo img {
+                width: 150px;
+            }
+
+            .container {
+                padding: 40px;
+            }
+        }
+
+        /* Estilos para pantallas pequeñas (móviles) */
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .services {
+                padding: 15px;
+            }
+
+            .logo img {
+                width: 100px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Barber Shop</h1>
+        </header>
+
+        <div class="logo">
+            <img src="static/logo1.png" alt="Barber Logo">
+        </div>
+
+        <section class="services">
+            <h2>Servicios</h2>
+            <ul>
+                <li>Corte <span>10€</span></li>
+                <li>Corte + Barba <span>15€</span></li>
+                <li>Corte + Lavado <span>13€</span></li>
+            </ul>
+        </section>
+
+        <footer class="footer">
+            <!-- Imagen en la parte baja de la página -->
+            <div class="image-container">
+                <img src="static/footer.PNG" alt="footer">
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

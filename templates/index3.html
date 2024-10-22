@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZND42296P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9ZND42296P');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Shop Vintage</title>
+
+    <!-- Fuente para darle estilo más retro/vintage -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cinzel', serif; /* Nueva fuente retro */
+        }
+
+        body {
+            background: url('static/fondo3.png') no-repeat center center fixed; /* Imagen de fondo */
+            background-size: cover; /* Asegura que el fondo cubra toda la pantalla */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+            margin: 20px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            color: #2b2b2b; /* Color más suave y elegante */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); /* Sombra más sutil */
+        }
+
+        .logo img {
+            width: 180px;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            margin-bottom: 40px; /* Espacio adicional para pegarlo más abajo */
+        }
+
+        .vintage-button {
+            background-color: #3e3e3e; /* Color más oscuro y moderno */
+            color: #f2f2f2; /* Color claro para el texto */
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 8px; /* Bordes más suaves */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra más elegante */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .vintage-button:hover {
+            background-color: #5a5a5a; /* Color más claro en hover */
+            transform: translateY(-2px); /* Pequeño efecto de elevación en hover */
+        }
+
+        a {
+            text-decoration: none; /* Elimina el subrayado en los enlaces */
+        }
+        /* Botón de WhatsApp flotante */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #20b858;
+        }
+
+        .whatsapp-button img {
+            width: 35px;
+            height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>BARBER SHOP</h1>
+        </header>
+
+        <div class="logo">
+            <img src="static/logo3.png" alt="Barber Logo">
+        </div>
+
+        <section class="buttons">
+            <a href="/reservas3">
+            <button class="vintage-button">Reservar Cita</button>
+            </a>
+            <a href="/carta3">
+            <button class="vintage-button">Servicios</button>
+            </a>
+            <a href="/galeria3">
+            <button class="vintage-button">Trabajos</button>
+            </a>
+            <a href="/panel3">
+            <button class="vintage-button">Administración</button>
+            </a>
+        </section>
+
+    </div>
+<!-- Botón de WhatsApp flotante -->
+    <a href="https://wa.me/34625433667" class="whatsapp-button" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
+    </a>
+</body>
+</html>

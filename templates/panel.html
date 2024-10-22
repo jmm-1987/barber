@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Citas reservadas</title>
+
+    <!-- Moment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- Pikaday JS -->
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Pikaday CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
+
+    <style>
+      /* Fondo de pantalla */
+      body {
+        background-image: url('/static/Barber.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+      }
+
+      .bg-overlay {
+        background-color: rgba(255, 255, 255, 0); /* Ligera opacidad para el contenido */
+        padding: 20px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body class="flex items-center justify-center">
+    <div class="flex size-full min-h-screen flex-col bg-overlay">
+      <div class="flex items-center p-4 pb-2 justify-between">
+        <h2 class="text-lg font-bold text-center">Barber Shop - Citas No Disponibles</h2>
+      </div>
+
+      <!-- Calendario interactivo -->
+      <div class="flex justify-center py-4">
+        <input
+          type="text"
+          id="datepicker"
+          class="form-input w-full h-12 rounded-xl bg-gray-200 p-4 mb-4"
+          placeholder="Selecciona una fecha"
+        />
+      </div>
+
+      <!-- Citas dinámicas -->
+      <div class="p-4">
+        <h2 class="text-lg font-bold">Citas No Disponibles</h2>
+        <div id="citas" class="grid grid-cols-1 gap-4"></div>
+      </div>
+    </div>
+
+    <!-- Script para Pikaday, selección de hora y llamada al backend -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Inicializar el calendario Pikaday
+        var picker = new Pikaday({
+          field: document.getElementById("datepicker"),
+          format: "YYYY-MM-DD",
+          onSelect: function () {
+            const selectedDate = picker.toString();  // Usamos toString para obtener la fecha seleccionada
+            console.log("Fecha seleccionada: " + selectedDate);
+
+            // Llamada al backend para obtener las citas no disponibles
+            fetch(`/unavailable_hours?date=${selectedDate}`)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error del servidor: " + response.status);
+                }
+                return response.json();
+              })
+              .then((data) => {
+                const citasDiv = document.getElementById("citas");
+                citasDiv.innerHTML = ""; // Limpiar las citas anteriores
+
+                // Verificar si hay citas no disponibles
+                if (data.unavailable_hours && data.unavailable_hours.length > 0) {
+                  // Recorrer cada cita y mostrarla en la página
+                  data.unavailable_hours.forEach((cita) => {
+                    const citaElement = document.createElement("div");
+                    citaElement.className = "p-4 bg-white rounded-lg shadow-md";
+                    citaElement.innerHTML = `
+                      <p><strong>ID:</strong> ${cita.id}</p>
+                      <p><strong>Nombre:</strong> ${cita.usuario}</p>
+                      <p><strong>Teléfono:</strong> ${cita.telefono}</p>
+                      <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                      <p><strong>Hora:</strong> ${cita.hora}</p>
+                      <div class="flex justify-between mt-2">
+                        <button onclick="deleteCita('${cita.fecha}', '${cita.hora}')" class="bg-red-500 text-white px-4 py-2 rounded">Cancelar Cita</button>
+                        <a href="tel:${cita.telefono}" class="bg-blue-500 text-white px-4 py-2 rounded flex items-center justify-center">
+                          <i class="fas fa-phone mr-2"></i>
+                        </a>
+                        <a href="https://wa.me/${cita.telefono}" class="bg-green-500 text-white px-4 py-2 rounded flex items-center justify-center">
+                          <i class="fab fa-whatsapp mr-2"></i>
+                        </a>
+                      </div>
+                    `;
+                    citasDiv.appendChild(citaElement);
+                  });
+                } else {
+                  citasDiv.innerHTML = "<p>No hay citas reservadas para la fecha seleccionada.</p>";
+                }
+              })
+              .catch((error) => {
+                console.error("Error al obtener las citas no disponibles:", error);
+              });
+          },
+        });
+      });
+
+      // Función para borrar la cita (llamado desde el botón de cancelar)
+      function deleteCita(fecha, hora) {
+        const confirmacion = confirm(`¿Estás seguro de que quieres cancelar la cita del ${fecha} a las ${hora}?`);
+        if (!confirmacion) return;
+
+        // Datos a enviar en formato JSON
+        const citaData = {
+          fecha: fecha,
+          hora: hora
+        };
+
+        fetch('/delete_cita', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(citaData)
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error del servidor: " + response.status);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            alert("Cita cancelada exitosamente");
+            console.log("Respuesta del servidor:", data);
+            // Recargar la página o actualizar la lista de citas
+            location.reload();
+          })
+          .catch((error) => {
+            console.error("Error al cancelar la cita:", error);
+            alert("Hubo un error al cancelar la cita.");
+          });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZND42296P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9ZND42296P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Shop Modern</title>
+
+    <!-- Incluir fuente vintage desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* -------------------------
+           Estilos generales (comunes para todas las pantallas)
+        ------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff; /* Fondo blanco moderno */
+            color: #000000; /* Texto en negro */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ajuste para comenzar más arriba */
+            align-items: center;
+            padding: 20px;
+            flex-grow: 1;
+            text-align: center; /* Centra el texto dentro del contenedor */
+        }
+
+        .header {
+            margin-bottom: 30px; /* Reducir margen inferior */
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif; /* Fuente vintage estilo barbería */
+            font-size: 48px;
+            font-weight: bold;
+            color: #000000; /* Texto en negro */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 10px; /* Reducir margen superior */
+        }
+
+        .logo img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 40px;
+            filter: grayscale(100%); /* Logo en blanco y negro */
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Espacio entre los botones */
+            flex-wrap: wrap; /* Permite que los botones se ajusten verticalmente si no hay espacio horizontal */
+            width: 100%; /* Asegura que los botones ocupen el ancho completo */
+        }
+
+        .modern-button {
+            font-family: 'Cinzel', serif; /* Fuente vintage estilo barbería */
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #000000;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            flex-grow: 1; /* Hacer que los botones ocupen el mismo espacio */
+            max-width: 200px; /* Limita el tamaño máximo del botón */
+            height: 50px; /* Asegura que los botones tengan la misma altura */
+            display: flex; /* Flexbox para centrar el contenido */
+            justify-content: center; /* Centra horizontalmente el texto del botón */
+            align-items: center; /* Centra verticalmente el texto del botón */
+            text-align: center; /* Asegura que el texto esté centrado */
+        }
+
+        .modern-button:hover {
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        .footer {
+            position: relative;
+            width: 100%;
+        }
+
+        .stripe-bar {
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #000000 50%, #ffffff 50%);
+            margin-top: 40px;
+        }
+
+        .image-container {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            margin-top: 20px; /* Añadir margen para que no quede tan pegado */
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 600px; /* Ajustar el tamaño máximo de la imagen */
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* -------------------------
+           Estilos para pantallas grandes (a partir de 768px)
+        ------------------------- */
+        @media (min-width: 768px) {
+            .modern-button {
+                width: auto; /* Aumenta el tamaño de los botones a su valor original en pantallas grandes */
+            }
+
+            /* Ajustes específicos para pantallas grandes */
+            .header h1 {
+                font-size: 56px; /* Tamaño de texto mayor para pantallas grandes */
+                margin-top: 20px; /* Aumentar margen superior en pantallas grandes */
+            }
+
+            .logo img {
+                width: 150px; /* Aumentar el tamaño del logo en pantallas grandes */
+            }
+
+            .image-container img {
+                max-width: 800px; /* Imagen más grande en pantallas grandes */
+            }
+
+            .container {
+                padding: 40px; /* Aumentar padding en pantallas grandes */
+            }
+        }
+
+        /* -------------------------
+           Estilos para pantallas pequeñas (móviles)
+        ------------------------- */
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 36px; /* Tamaño de texto más pequeño en pantallas pequeñas */
+            }
+
+            .modern-button {
+                padding: 10px 20px; /* Botones más pequeños para pantallas móviles */
+            }
+
+            .logo img {
+                width: 200px; /* Logo más pequeño en pantallas pequeñas */
+            }
+
+            .image-container img {
+                max-width: 400px; /* Imagen más pequeña en pantallas pequeñas */
+            }
+
+            .container {
+                padding: 10px; /* Menor padding en pantallas pequeñas */
+            }
+        }
+
+        /* Centrar el texto de selección */
+        .select-hour-text {
+            text-align: center; /* Centra el texto horizontalmente */
+            font-size: 18px; /* Tamaño adecuado */
+            margin-bottom: 20px; /* Espacio debajo del texto */
+            color: #000000; /* Color del texto */
+        }
+        /* Botón de WhatsApp flotante */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #20b858;
+        }
+
+        .whatsapp-button img {
+            width: 35px;
+            height: 35px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Barber Shop</h1>
+        </header>
+
+        <div class="logo">
+            <img src="static/logo1.png" alt="Barber Logo">
+        </div>
+
+        <section class="buttons">
+            <a href="/reservas1">
+            <button class="modern-button">Reservar Cita</button>
+            </a>
+            <a href="/carta1">
+            <button class="modern-button">Servicios</button>
+            </a>
+            <a href="/galeria1">
+            <button class="modern-button">Trabajos</button>
+            </a>
+            <a href="/panel1">
+            <button class="modern-button">Administración</button>
+            </a>
+        </section>
+
+        <footer class="footer">
+            <!-- Imagen en la parte baja de la página -->
+            <div class="image-container">
+                <img src="static/footer.PNG" alt="footer">
+            </div>
+        </footer>
+    </div>
+<!-- Botón de WhatsApp flotante -->
+    <a href="https://wa.me/34625433667" class="whatsapp-button" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
+    </a>
+</body>
+</html>

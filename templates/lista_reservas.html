@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horarios del Día</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Horarios del Día</h1>
+
+    <label for="date">Seleccione la fecha:</label>
+    <input type="date" id="date" name="date">
+    <button onclick="cargarHorarios()">Cargar Horarios</button>
+
+    <table border="1" id="tabla-horarios">
+        <thead>
+            <tr>
+                <th>Hora</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se cargarán los datos -->
+        </tbody>
+    </table>
+
+    <script>
+        function cargarHorarios() {
+            var fecha = document.getElementById('date').value;
+
+            if (!fecha) {
+                alert('Por favor, seleccione una fecha.');
+                return;
+            }
+
+            // Hacer la solicitud a la API
+            $.getJSON(`/horarios_dia?date=${fecha}`, function(data) {
+                // Limpiar la tabla
+                $('#tabla-horarios tbody').empty();
+
+                // Verificar si la respuesta contiene horarios
+                if (data.horarios && data.horarios.length > 0) {
+                    data.horarios.forEach(function(horario) {
+                        // Añadir cada fila a la tabla
+                        var row = `<tr>
+                            <td>${horario.hora}</td>
+                            <td>${horario.nombre}</td>
+                        </tr>`;
+                        $('#tabla-horarios tbody').append(row);
+                    });
+                } else {
+                    alert(data.message || 'No hay horarios disponibles.');
+                }
+            }).fail(function() {
+                alert('Error al cargar los horarios.');
+            });
+        }
+    </script>
+</body>
+</html>

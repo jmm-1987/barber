@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZND42296P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9ZND42296P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Shop Vintage - Servicios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: #e7dec8; /* Fondo tipo papel envejecido */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            font-size: 50px;
+            color: #4e3629;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 3px #1a1a1a;
+        }
+
+        .logo img {
+            width: 150px;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            margin-bottom: 40px;
+        }
+
+        .vintage-button {
+            background-color: #4e3629;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 8px #000;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .vintage-button:hover {
+            background-color: #7b5d47;
+        }
+
+        .services {
+            font-size: 24px;
+            color: #4e3629;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            padding: 20px;
+            text-align: left;
+            border-radius: 10px;
+            background-color: #fff; /* Fondo blanco para contrastar */
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .services p {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .footer .stripe-bar {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(90deg, #d62828 20%, #fefae0 20%, #fefae0 40%, #003049 40%, #003049 60%, #fefae0 60%, #fefae0 80%, #d62828 80%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>BARBER SHOP</h1>
+        </header>
+
+
+        <section class="services">
+            <p>Corte de Pelo <span>10€</span></p>
+            <p>Corte + Barba <span>15€</span></p>
+            <p>Corte + Lavado <span>13€</span></p>
+        </section>
+
+        <footer class="footer">
+            <div class="stripe-bar"></div>
+        </footer>
+    </div>
+</body>
+</html>

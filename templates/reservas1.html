@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservas - Barber Shop Modern</title>
+
+    <!-- Fuente para darle estilo más retro/vintage -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Moment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- Pikaday JS -->
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+
+    <!-- Pikaday CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Cinzel', serif; /* Nueva fuente retro */
+      }
+
+      body {
+        background-color: #ffffff; /* Fondo blanco */
+        color: #000000; /* Texto en negro */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        flex-grow: 1;
+        text-align: center; /* Centrar texto dentro del contenedor */
+      }
+
+      .header h1 {
+        font-size: 48px;
+        font-weight: bold;
+        color: #000000; /* Texto en negro */
+        margin-bottom: 30px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .logo {
+        margin-bottom: 40px;
+      }
+
+      .form-input {
+        background-color: #f5f5f5; /* Color blanco para los campos de entrada */
+        color: #000000;
+        border: 2px solid #000000; /* Borde negro */
+        border-radius: 8px;
+        padding: 10px;
+        width: 100%;
+        max-width: 400px; /* Limitar el ancho máximo del input */
+        margin-bottom: 20px;
+      }
+
+      .modern-button {
+        background-color: #000000;
+        color: #ffffff;
+        border: 2px solid #000000;
+        padding: 15px 40px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        text-align: center; /* Centrar el texto del botón */
+        width: 100%;
+        max-width: 400px; /* Limitar el tamaño máximo del botón */
+        box-sizing: border-box;
+      }
+
+      .modern-button:hover {
+        background-color: #ffffff;
+        color: #000000;
+        border: 2px solid #000000;
+      }
+
+      .active-btn {
+        background-color: #e0d8c6 !important;
+        color: white !important;
+        border: 2px solid black;
+      }
+
+      /* Contenedor de los botones */
+      .buttons-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+        gap: 20px; /* Espacio entre los botones */
+        margin-bottom: 20px;
+        justify-content: center; /* Centrar los botones en el contenedor */
+        width: 100%;
+        max-width: 400px; /* Limitar el ancho máximo para que se vea bien en pantallas pequeñas */
+      }
+
+      .footer {
+        margin-top: 40px;
+      }
+
+      .stripe-bar {
+        width: 100%;
+        height: 30px;
+        background: repeating-linear-gradient(
+          45deg,
+          #d62828, /* Rojo típico de barbería */
+          #d62828 10px,
+          #fefae0 10px,
+          #fefae0 20px,
+          #003049 20px,
+          #003049 30px
+        );
+      }
+
+      /* Centrar el texto "Selecciona la hora" */
+      .select-hour-text {
+        text-align: center;
+        font-size: 24px; /* Ajustar el tamaño del texto */
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #000000;
+      }
+
+      /* Media Query para pantallas pequeñas */
+      @media (max-width: 768px) {
+        .buttons-container {
+          grid-template-columns: repeat(2, 1fr); /* Mantener dos columnas en pantallas pequeñas */
+          max-width: 100%; /* Permitir que el contenedor ocupe todo el ancho */
+        }
+
+        .modern-button {
+          font-size: 14px; /* Reducir el tamaño de los botones en pantallas pequeñas */
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Barber Shop</h1>
+      </header>
+
+      <!-- Calendario interactivo -->
+      <div class="logo">
+        <input
+          type="text"
+          id="datepicker"
+          class="form-input"
+          placeholder="Selecciona una fecha"
+        />
+      </div>
+
+      <!-- Citas dinámicas -->
+      <div class="select-hour-text">
+        <h2>Selecciona la hora</h2>
+      </div>
+
+      <section class="buttons-container" id="citas">
+        <!-- Aquí se cargarán los botones de las horas disponibles -->
+      </section>
+
+      <!-- Datos del usuario -->
+      <div class="p-4">
+        <input
+          type="text"
+          id="nombre"
+          placeholder="Nombre y apellido"
+          class="form-input"
+        />
+        <input
+          type="text"
+          id="telefono"
+          placeholder="Teléfono"
+          class="form-input"
+        />
+        <button
+          id="confirmBtn"
+          class="modern-button"
+        >
+          Confirmar reserva
+        </button>
+      </div>
+
+      <footer class="footer">
+            <!-- Imagen en la parte baja de la página -->
+            <div class="image-container">
+                <img src="static/footer.PNG" alt="footer">
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script para Pikaday, selección de hora y llamada al backend -->
+    <script>
+      let selectedTime = ""; // Variable para almacenar la hora seleccionada
+      let selectedDate = ""; // Variable para almacenar la fecha seleccionada
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Inicializar el calendario Pikaday
+        var picker = new Pikaday({
+          field: document.getElementById("datepicker"),
+          format: "YYYY-MM-DD",
+          onSelect: function () {
+            selectedDate = picker.toString(); // Usamos toString para obtener la fecha seleccionada
+            console.log("Selected date: " + selectedDate);
+
+            // Llamada al backend para obtener las citas disponibles
+            fetch(`/available_hours?date=${selectedDate}`)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Server error: " + response.status);
+                }
+                return response.json();
+              })
+              .then((data) => {
+                const citasDiv = document.getElementById("citas");
+                citasDiv.innerHTML = ""; // Limpiar las citas anteriores
+
+                if (data && data.available_hours.length > 0) {
+                  data.available_hours.forEach((hora) => {
+                    const citaButton = document.createElement("button");
+                    citaButton.className = "modern-button"; // Usar el estilo moderno
+                    citaButton.innerText = hora;
+                    citaButton.onclick = function () {
+                      selectedTime = hora; // Almacenar la hora seleccionada
+                      console.log("Selected time: " + selectedTime);
+
+                      // Desmarcar todos los botones y marcar solo el seleccionado
+                      document.querySelectorAll('#citas button').forEach(btn => {
+                        btn.classList.remove('active-btn');
+                      });
+                      citaButton.classList.add('active-btn'); // Marcar el botón seleccionado
+                    };
+                    citasDiv.appendChild(citaButton);
+                  });
+                } else {
+                  citasDiv.innerText = data.message || "No available hours";
+                }
+              })
+              .catch((error) => {
+                console.error("Error fetching available hours:", error);
+              });
+          },
+        });
+
+        // Función que se ejecuta al confirmar la cita
+        document.getElementById("confirmBtn").addEventListener("click", function () {
+          const nombre = document.getElementById("nombre").value;
+          const telefono = document.getElementById("telefono").value;
+
+          if (!nombre || !telefono || !selectedDate || !selectedTime) {
+            alert("Por favor, completa todos los campos y selecciona una hora.");
+            return;
+          }
+
+          // Crear el objeto JSON con los datos de la cita
+          const citaData = {
+            usuario: nombre,
+            telefono: telefono,
+            fecha: selectedDate,
+            hora: selectedTime
+          };
+
+          // Hacer la llamada al backend para crear la cita
+          fetch('/add_cita', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(citaData) // Enviar los datos de la cita
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Server error: " + response.status);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              alert("Cita confirmada con éxito");
+              console.log("Respuesta del servidor:", data);
+
+              // Formatear la fecha a DD/MM/YYYY usando Moment.js
+              const formattedDate = moment(selectedDate).format("DD/MM/YYYY");
+
+              // Crear el mensaje de WhatsApp
+              const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${selectedTime}. ¡Te esperamos en la Barbería!`;
+              const whatsappURL = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+              // Abrir WhatsApp con el mensaje
+              window.open(whatsappURL, '_blank');
+
+              // Redirigir al index después de confirmar la cita
+              window.location.href = '/modelo1'; // Aquí puedes poner la URL de tu página de inicio
+            })
+            .catch((error) => {
+              console.error("Error al crear la cita:", error);
+              alert("Hubo un error al crear la cita.");
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

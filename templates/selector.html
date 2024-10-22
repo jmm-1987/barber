@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZND42296P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9ZND42296P');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Formato - Barber Shop</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f5;
+            background-image: linear-gradient(135deg, #f0f0f5 25%, transparent 25%),
+                              linear-gradient(225deg, #f0f0f5 25%, transparent 25%),
+                              linear-gradient(45deg, #f0f0f5 25%, transparent 25%),
+                              linear-gradient(315deg, #f0f0f5 25%, transparent 25%);
+            background-position: 40px 40px, 40px 40px, 0px 0px, 0px 0px;
+            background-size: 80px 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .logo-container {
+            margin-bottom: 0px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo-container img {
+            max-width: 150px;
+            height: auto;
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #2d2d2d;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            color: #5f5f5f;
+            margin-top: 10px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .option {
+            width: 300px;
+            height: 600px;
+            cursor: pointer;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #ffffff;
+            border: 2px solid #e0e0e0;
+        }
+
+        .option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .option:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
+            border-color: #d0d0d5;
+        }
+
+        @media (max-width: 768px) {
+            .option {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        /* Estilos para las cajas de características */
+        .features {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .feature-box {
+            width: 30%;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* Inicialmente invisibles para efecto de scroll */
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .feature-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-title {
+            font-size: 24px;
+            color: #2d2d2d;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-description {
+            color: #5f5f5f;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .feature-box {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Botón de WhatsApp flotante */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #20b858;
+        }
+
+        .whatsapp-button img {
+            width: 35px;
+            height: 35px;
+        }
+
+        /* Tooltip para mostrar mensaje */
+        .whatsapp-tooltip {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 999;
+        }
+
+        .whatsapp-tooltip.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del logo -->
+    <div class="logo-container">
+        <img src="static/logotipo.png" alt="Logo jmurillodev">
+    </div>
+
+    <div class="header">
+        <p>Selecciona un modelo para probar la aplicación</p>
+    </div>
+
+    <div class="options">
+        <a href="/modelo1" class="option">
+            <img src="static/modelo1.PNG" alt="Formato 1">
+        </a>
+        <a href="/modelo2" class="option">
+            <img src="static/modelo2.PNG" alt="Formato 2">
+        </a>
+        <a href="/modelo3" class="option">
+            <img src="static/modelo3.PNG" alt="Formato 3">
+        </a>
+    </div>
+
+    <!-- Sección de características con efecto de scroll -->
+    <div class="features">
+        <div class="feature-box">
+            <h3 class="feature-title">Rendimiento Óptimo</h3>
+            <p class="feature-description">Nuestra aplicación garantiza velocidad y eficiencia, optimizada para un rendimiento sin interrupciones.</p>
+        </div>
+        <div class="feature-box">
+            <h3 class="feature-title">Fácil de Usar</h3>
+            <p class="feature-description">Diseño intuitivo y amigable para el usuario, sin necesidad de conocimientos técnicos avanzados.</p>
+        </div>
+        <div class="feature-box">
+            <h3 class="feature-title">Personalizable</h3>
+            <p class="feature-description">Adaptable a tus necesidades específicas, permitiendo personalizaciones para cada cliente.</p>
+        </div>
+    </div>
+
+    <!-- Tooltip con el mensaje de WhatsApp -->
+    <div class="whatsapp-tooltip" id="whatsapp-tooltip">
+        Si tienes alguna duda, te respondemos en el acto
+    </div>
+
+    <!-- Botón de WhatsApp flotante -->
+    <a href="https://wa.me/34625433667" class="whatsapp-button" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
+    </a>
+
+    <script>
+        // Mostrar el tooltip al cargar la página
+        const tooltip = document.getElementById('whatsapp-tooltip');
+
+        function showTooltip() {
+            tooltip.classList.add('visible');
+
+            // Ocultar el tooltip después de 5 segundos
+            setTimeout(() => {
+                tooltip.classList.remove('visible');
+            }, 5000);
+        }
+
+        // Mostrar el tooltip al cargar la página
+        window.addEventListener('load', showTooltip);
+
+        // Función para detectar cuándo las cajas están en la vista y aplicar la clase "visible"
+        const featureBoxes = document.querySelectorAll('.feature-box');
+
+        function checkVisibility() {
+            const triggerBottom = window.innerHeight / 1.2;
+
+            featureBoxes.forEach(box => {
+                const boxTop = box.getBoundingClientRect().top;
+
+                if (boxTop < triggerBottom) {
+                    box.classList.add('visible');
+                } else {
+                    box.classList.remove('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkVisibility);
+
+        // Ejecutar la función al cargar la página
+        checkVisibility();
+    </script>
+
+</body>
+</html>

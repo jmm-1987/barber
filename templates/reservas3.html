@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservas - Barber Shop Vintage</title>
+
+    <!-- Fuente para darle estilo más retro/vintage -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Moment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- Pikaday JS -->
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+
+    <!-- Pikaday CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Cinzel', serif; /* Nueva fuente retro */
+      }
+
+      body {
+        background: url('static/fondo3.png') no-repeat center center fixed; /* Imagen de fondo */
+        background-size: cover; /* Asegura que el fondo cubra toda la pantalla */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .container {
+        text-align: center;
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 30px;
+        margin: 20px;
+      }
+
+      .header h1 {
+        font-size: 48px;
+        color: #2b2b2b; /* Color más suave y elegante */
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); /* Sombra más sutil */
+      }
+
+      .logo img {
+        width: 180px;
+        height: auto;
+        margin: 20px 0;
+      }
+
+      .vintage-button {
+        background-color: #3e3e3e; /* Color más oscuro y moderno */
+        color: #f2f2f2; /* Color claro para el texto */
+        border: none;
+        padding: 15px 30px;
+        margin: 10px;
+        font-size: 16px;
+        border-radius: 8px; /* Bordes más suaves */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra más elegante */
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .vintage-button:hover {
+        background-color: #5a5a5a; /* Color más claro en hover */
+        transform: translateY(-2px); /* Pequeño efecto de elevación en hover */
+      }
+
+      .footer .stripe-bar {
+        width: 100%;
+        height: 20px;
+        background: linear-gradient(90deg, #d62828 20%, #fefae0 20%, #fefae0 40%, #003049 40%, #003049 60%, #fefae0 60%, #fefae0 80%, #d62828 80%);
+      }
+
+      .form-input {
+        background-color: #f5f0e1; /* Color crema para los campos de entrada */
+        color: #4e3629;
+        border: 2px solid #4e3629; /* Borde vintage */
+        border-radius: 8px;
+        padding: 10px;
+      }
+
+      .active-btn {
+        background-color: #e0d8c6 !important;
+        color: white !important;
+        border: 2px solid black;
+      }
+
+      a {
+        text-decoration: none; /* Elimina el subrayado en los enlaces */
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>BARBER SHOP</h1>
+      </header>
+
+      <!-- Calendario interactivo -->
+      <div class="logo">
+        <input
+          type="text"
+          id="datepicker"
+          class="form-input w-full h-12 rounded-xl p-4 mb-4"
+          placeholder="Selecciona una fecha"
+        />
+      </div>
+
+      <!-- Citas dinámicas -->
+      <section class="buttons">
+        <h2 class="text-lg font-bold">Selecciona la hora</h2>
+        <div id="citas" class="grid grid-cols-2 gap-4"></div>
+      </section>
+
+      <!-- Datos del usuario -->
+      <div class="p-4">
+        <input
+          type="text"
+          id="nombre"
+          placeholder="Nombre y apellido"
+          class="form-input w-full h-12 mb-4"
+        />
+        <input
+          type="text"
+          id="telefono"
+          placeholder="Teléfono"
+          class="form-input w-full h-12 mb-4"
+        />
+        <button
+          id="confirmBtn"
+          class="vintage-button w-full h-12"
+        >
+          Confirmar reserva
+        </button>
+      </div>
+
+      <footer class="footer">
+        <div class="stripe-bar"></div>
+      </footer>
+    </div>
+
+    <!-- Script para Pikaday, selección de hora y llamada al backend -->
+    <script>
+      let selectedTime = ""; // Variable para almacenar la hora seleccionada
+      let selectedDate = ""; // Variable para almacenar la fecha seleccionada
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Inicializar el calendario Pikaday
+        var picker = new Pikaday({
+          field: document.getElementById("datepicker"),
+          format: "YYYY-MM-DD",
+          onSelect: function () {
+            selectedDate = picker.toString(); // Usamos toString para obtener la fecha seleccionada
+            console.log("Selected date: " + selectedDate);
+
+            // Llamada al backend para obtener las citas disponibles
+            fetch(`/available_hours?date=${selectedDate}`)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Server error: " + response.status);
+                }
+                return response.json();
+              })
+              .then((data) => {
+                const citasDiv = document.getElementById("citas");
+                citasDiv.innerHTML = ""; // Limpiar las citas anteriores
+
+                if (data && data.available_hours.length > 0) {
+                  data.available_hours.forEach((hora) => {
+                    const citaButton = document.createElement("button");
+                    citaButton.className = "vintage-button w-full h-12"; // Usar el estilo vintage-button
+                    citaButton.innerText = hora;
+                    citaButton.onclick = function () {
+                      selectedTime = hora; // Almacenar la hora seleccionada
+                      console.log("Selected time: " + selectedTime);
+
+                      // Desmarcar todos los botones y marcar solo el seleccionado
+                      document.querySelectorAll('#citas button').forEach(btn => {
+                        btn.classList.remove('active-btn');
+                      });
+                      citaButton.classList.add('active-btn'); // Marcar el botón seleccionado
+                    };
+                    citasDiv.appendChild(citaButton);
+                  });
+                } else {
+                  citasDiv.innerText = data.message || "No available hours";
+                }
+              })
+              .catch((error) => {
+                console.error("Error fetching available hours:", error);
+              });
+          },
+        });
+
+        // Función que se ejecuta al confirmar la cita
+        document.getElementById("confirmBtn").addEventListener("click", function () {
+          const nombre = document.getElementById("nombre").value;
+          const telefono = document.getElementById("telefono").value;
+
+          if (!nombre || !telefono || !selectedDate || !selectedTime) {
+            alert("Por favor, completa todos los campos y selecciona una hora.");
+            return;
+          }
+
+          // Crear el objeto JSON con los datos de la cita
+          const citaData = {
+            usuario: nombre,
+            telefono: telefono,
+            fecha: selectedDate,
+            hora: selectedTime
+          };
+
+          // Hacer la llamada al backend para crear la cita
+          fetch('/add_cita', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(citaData) // Enviar los datos de la cita
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Server error: " + response.status);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              alert("Cita confirmada con éxito");
+              console.log("Respuesta del servidor:", data);
+
+              // Formatear la fecha a DD/MM/YYYY usando Moment.js
+              const formattedDate = moment(selectedDate).format("DD/MM/YYYY");
+
+              // Crear el mensaje de WhatsApp
+              const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${selectedTime}. ¡Te esperamos en la Barbería!`;
+              const whatsappURL = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+              // Abrir WhatsApp con el mensaje
+              window.open(whatsappURL, '_blank');
+
+              // Redirigir al index después de confirmar la cita
+              window.location.href = '/modelo3'; // Aquí puedes poner la URL de tu página de inicio
+            })
+            .catch((error) => {
+              console.error("Error al crear la cita:", error);
+              alert("Hubo un error al crear la cita.");
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZND42296P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9ZND42296P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Shop Vintage - Galería</title>
+
+    <!-- Fuente para darle estilo más retro/vintage -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cinzel', serif; /* Fuente retro */
+        }
+
+        body {
+            background: url('static/fondo3.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+            margin: 20px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            color: #2b2b2b;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05); /* Efecto de aumento */
+        }
+
+        .logo img {
+            width: 180px;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            margin-bottom: 40px;
+        }
+
+        .vintage-button {
+            background-color: #3e3e3e;
+            color: #f2f2f2;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .vintage-button:hover {
+            background-color: #5a5a5a;
+            transform: translateY(-2px);
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Galería Barber Shop</h1>
+        </header>
+
+        <section class="gallery">
+            <img src="static/galeria/g1.webp" alt="Foto 1">
+            <img src="static/galeria/g2.webp" alt="Foto 2">
+            <img src="static/galeria/g3.webp" alt="Foto 3">
+            <img src="static/galeria/g4.webp" alt="Foto 4">
+            <img src="static/galeria/g5.webp" alt="Foto 5">
+            <img src="static/galeria/g6.webp" alt="Foto 6">
+        </section>
+    </div>
+</body>
+</html>

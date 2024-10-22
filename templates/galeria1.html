@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZND42296P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9ZND42296P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Shop Modern - Galería</title>
+
+    <!-- Incluir fuente vintage desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* -------------------------
+           Estilos generales (comunes para todas las pantallas)
+        ------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff; /* Fondo blanco moderno */
+            color: #000000; /* Texto en negro */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            flex-grow: 1;
+            text-align: center; /* Centra el texto dentro del contenedor */
+        }
+
+        .header {
+            margin-bottom: 30px; /* Reducir margen inferior */
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif; /* Fuente vintage estilo barbería */
+            font-size: 48px;
+            font-weight: bold;
+            color: #000000; /* Texto en negro */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 10px; /* Reducir margen superior */
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border: 2px solid #000000;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: grayscale(100%); /* Estilo blanco y negro */
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            filter: grayscale(0%); /* Eliminar blanco y negro al pasar el ratón */
+        }
+
+        .footer {
+            position: relative;
+            width: 100%;
+        }
+
+        .stripe-bar {
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #000000 50%, #ffffff 50%);
+            margin-top: 40px;
+        }
+
+        .image-container {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 600px; /* Ajustar el tamaño máximo de la imagen */
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* -------------------------
+           Estilos para pantallas grandes (a partir de 768px)
+        ------------------------- */
+        @media (min-width: 768px) {
+            .header h1 {
+                font-size: 56px; /* Tamaño de texto mayor para pantallas grandes */
+                margin-top: 20px;
+            }
+
+            .gallery img {
+                width: 400px;
+                height: 400px;
+            }
+
+            .container {
+                padding: 40px; /* Aumentar padding en pantallas grandes */
+            }
+        }
+
+        /* -------------------------
+           Estilos para pantallas pequeñas (móviles)
+        ------------------------- */
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 36px; /* Tamaño de texto más pequeño en pantallas pequeñas */
+            }
+
+            .gallery img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .container {
+                padding: 10px; /* Menor padding en pantallas pequeñas */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Galería Barber Shop</h1>
+        </header>
+
+        <section class="gallery">
+            <img src="static/galeria/g1.webp" alt="Foto 1">
+            <img src="static/galeria/g2.webp" alt="Foto 2">
+            <img src="static/galeria/g3.webp" alt="Foto 3">
+            <img src="static/galeria/g4.webp" alt="Foto 4">
+            <img src="static/galeria/g5.webp" alt="Foto 5">
+            <img src="static/galeria/g6.webp" alt="Foto 6">
+        </section>
+
+        <footer class="footer">
+            <!-- Imagen en la parte baja de la página -->
+            <div class="image-container">
+                <img src="static/footer.PNG" alt="footer">
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

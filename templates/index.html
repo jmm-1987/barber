@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Epilogue:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700;900"
+    />
+    <title>Peluquería</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body class="m-0 p-0 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen bg-white group/design-root overflow-hidden" style='font-family: Epilogue, "Noto Sans", sans-serif;'>
+      <header class="flex items-center bg-white p-4 justify-between">
+        <h2 class="text-[#181114] text-2xl font-bold font-oswald text-left flex-1">Barber Shop</h2>
+        <button class="flex items-center justify-center rounded-full h-12 bg-transparent text-[#181114] text-base font-bold">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM176,88a48,48,0,0,1-96,0,8,8,0,0,1,16,0,32,32,0,0,0,64,0,8,8,0,0,1,16,0Z" />
+          </svg>
+        </button>
+      </header>
+      <div class="flex-grow p-0 m-0">
+        <!-- Aquí he actualizado la URL de la imagen de fondo -->
+        <div class="w-screen h-screen bg-cover bg-center flex flex-col justify-end overflow-hidden relative"
+          style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 25%),
+            url('/static/Barber.png'); background-size: cover;">
+
+          <!-- Contenedor de botones centrados -->
+          <div class="absolute inset-0 flex justify-center items-center">
+            <div class="flex gap-4 relative z-10"> <!-- z-10 asegura que los botones y la imagen se superponen correctamente -->
+              <a href="/reservas">
+                <button class="flex items-center justify-center rounded-full h-16 sm:h-20 md:h-24 lg:h-28 px-8 sm:px-10 md:px-12 lg:px-14 bg-[#097DAC] text-white text-base font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl">
+                  Reservar cita
+                </button>
+              </a>
+              <a href="/servicios">
+                <button class="flex items-center justify-center rounded-full h-16 sm:h-20 md:h-24 lg:h-28 px-8 sm:px-10 md:px-12 lg:px-14 bg-[#950F1C] text-white text-base font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl">
+                  Servicios
+                </button>
+              </a>
+              <a href="/panel">
+                <button class="flex items-center justify-center rounded-full h-16 sm:h-20 md:h-24 lg:h-28 px-8 sm:px-10 md:px-12 lg:px-14 bg-[#950F1C] text-white text-base font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl">
+                  Admin
+                </button>
+              </a>
+            </div>
+          </div>
+
+          <!-- Imagen superpuesta -->
+          <div class="absolute top-1/4 left-1/3 transform -translate-x-1/2 -translate-y-1/2 z-20">
+            <img src="/static/chica.webp" alt="Imagen más grande" class="rounded-full w-120 h-120 object-cover border-4 border-white shadow-lg" />
+          </div>
+
+          <div class="p-4">
+            <p class="text-white text-[28px] font-bold">Studio 17</p>
+          </div>
+        </div> <!-- Aquí cerramos el div del fondo de pantalla -->
+      </div> <!-- Cerramos el div que contiene el fondo de pantalla -->
+
+      <div class="h-5 bg-white"></div> <!-- Añadimos el footer o espacio blanco inferior -->
+    </div> <!-- Cerramos el div principal de la página -->
+  </body>
+</html>
