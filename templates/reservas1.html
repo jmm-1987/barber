@@ -209,10 +209,18 @@
       let selectedDate = ""; // Variable para almacenar la fecha seleccionada
 
       document.addEventListener("DOMContentLoaded", function () {
-        // Inicializar el calendario Pikaday
+        // Inicializar el calendario Pikaday con configuración en español
         var picker = new Pikaday({
           field: document.getElementById("datepicker"),
-          format: "YYYY-MM-DD",
+          format: "DD/MM/YYYY", // Formato de fecha en dd/mm/aaaa
+          firstDay: 1, // Comenzar la semana en lunes
+          i18n: {
+            previousMonth: 'Mes anterior',
+            nextMonth: 'Mes siguiente',
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+          },
           onSelect: function () {
             selectedDate = picker.toString(); // Usamos toString para obtener la fecha seleccionada
             console.log("Selected date: " + selectedDate);
@@ -252,7 +260,7 @@
               })
               .catch((error) => {
                 console.error("Error fetching available hours:", error);
-              });
+});
           },
         });
 
@@ -274,7 +282,7 @@
             return;
           }
 
-// Agregar el prefijo +34 al teléfono
+          // Agregar el prefijo +34 al teléfono
           telefono = "+34" + telefono;
 
           // Crear el objeto JSON con los datos de la cita
@@ -304,7 +312,7 @@
               console.log("Respuesta del servidor:", data);
 
               // Formatear la fecha a DD/MM/YYYY usando Moment.js
-              const formattedDate = moment(selectedDate).format("DD/MM/YYYY");
+              const formattedDate = moment(selectedDate, "DD/MM/YYYY").format("DD/MM/YYYY");
 
               // Crear el mensaje de WhatsApp
               const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${selectedTime}. ¡Te esperamos en la Barbería!`;
