@@ -18,9 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        /* -------------------------
-           Estilos generales (comunes para todas las pantallas)
-        ------------------------- */
+        /* Estilos generales */
         * {
             margin: 0;
             padding: 0;
@@ -29,8 +27,8 @@
         }
 
         body {
-            background-color: #ffffff; /* Fondo blanco moderno */
-            color: #000000; /* Texto en negro */
+            background-color: #ffffff;
+            color: #000000;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -39,44 +37,60 @@
         .container {
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Ajuste para comenzar más arriba */
+            justify-content: space-between;
             align-items: center;
             padding: 20px;
             flex-grow: 1;
-            text-align: center; /* Centra el texto dentro del contenedor */
+            text-align: center;
         }
 
         .header {
-            margin-bottom: 30px; /* Reducir margen inferior */
+            margin-bottom: 30px;
         }
 
+        /* Estilo del título con efecto escritura */
         .header h1 {
-            font-family: 'Cinzel', serif; /* Fuente vintage estilo barbería */
+            font-family: 'Cinzel', serif;
             font-size: 48px;
             font-weight: bold;
-            color: #000000; /* Texto en negro */
+            color: #000000;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-top: 10px; /* Reducir margen superior */
+            margin-top: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid;
+            width: 0; /* Inicialmente el ancho es 0 */
+            animation: typing 3s steps(30) forwards, blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: black; }
         }
 
         .logo img {
             width: 120px;
             height: auto;
             margin-bottom: 40px;
-            filter: grayscale(100%); /* Logo en blanco y negro */
+            filter: grayscale(100%);
         }
 
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 20px; /* Espacio entre los botones */
-            flex-wrap: wrap; /* Permite que los botones se ajusten verticalmente si no hay espacio horizontal */
-            width: 100%; /* Asegura que los botones ocupen el ancho completo */
+            gap: 20px;
+            flex-wrap: wrap;
+            width: 100%;
         }
 
         .modern-button {
-            font-family: 'Cinzel', serif; /* Fuente vintage estilo barbería */
+            font-family: 'Cinzel', serif;
             background-color: #000000;
             color: #ffffff;
             border: 2px solid #000000;
@@ -87,13 +101,13 @@
             cursor: pointer;
             text-transform: uppercase;
             transition: all 0.3s ease;
-            flex-grow: 1; /* Hacer que los botones ocupen el mismo espacio */
-            max-width: 200px; /* Limita el tamaño máximo del botón */
-            height: 50px; /* Asegura que los botones tengan la misma altura */
-            display: flex; /* Flexbox para centrar el contenido */
-            justify-content: center; /* Centra horizontalmente el texto del botón */
-            align-items: center; /* Centra verticalmente el texto del botón */
-            text-align: center; /* Asegura que el texto esté centrado */
+            flex-grow: 1;
+            max-width: 200px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         .modern-button:hover {
@@ -118,12 +132,12 @@
             width: 100%;
             text-align: center;
             position: relative;
-            margin-top: 20px; /* Añadir margen para que no quede tan pegado */
+            margin-top: 20px;
         }
 
         .image-container img {
             width: 100%;
-            max-width: 600px; /* Ajustar el tamaño máximo de la imagen */
+            max-width: 600px;
             height: auto;
         }
 
@@ -131,65 +145,61 @@
             text-decoration: none;
         }
 
-        /* -------------------------
-           Estilos para pantallas grandes (a partir de 768px)
-        ------------------------- */
+        /* Estilos para pantallas grandes */
         @media (min-width: 768px) {
             .modern-button {
-                width: auto; /* Aumenta el tamaño de los botones a su valor original en pantallas grandes */
+                width: auto;
             }
 
-            /* Ajustes específicos para pantallas grandes */
             .header h1 {
-                font-size: 56px; /* Tamaño de texto mayor para pantallas grandes */
-                margin-top: 20px; /* Aumentar margen superior en pantallas grandes */
+                font-size: 56px;
+                margin-top: 20px;
             }
 
             .logo img {
-                width: 150px; /* Aumentar el tamaño del logo en pantallas grandes */
+                width: 150px;
             }
 
             .image-container img {
-                max-width: 800px; /* Imagen más grande en pantallas grandes */
+                max-width: 800px;
             }
 
             .container {
-                padding: 40px; /* Aumentar padding en pantallas grandes */
+                padding: 40px;
             }
         }
 
-        /* -------------------------
-           Estilos para pantallas pequeñas (móviles)
-        ------------------------- */
+        /* Estilos para pantallas pequeñas */
         @media (max-width: 767px) {
             .header h1 {
-                font-size: 36px; /* Tamaño de texto más pequeño en pantallas pequeñas */
+                font-size: 36px;
             }
 
             .modern-button {
-                padding: 10px 20px; /* Botones más pequeños para pantallas móviles */
+                padding: 10px 20px;
             }
 
             .logo img {
-                width: 200px; /* Logo más pequeño en pantallas pequeñas */
+                width: 200px;
             }
 
             .image-container img {
-                max-width: 400px; /* Imagen más pequeña en pantallas pequeñas */
+                max-width: 400px;
             }
 
             .container {
-                padding: 10px; /* Menor padding en pantallas pequeñas */
+                padding: 10px;
             }
         }
 
         /* Centrar el texto de selección */
         .select-hour-text {
-            text-align: center; /* Centra el texto horizontalmente */
-            font-size: 18px; /* Tamaño adecuado */
-            margin-bottom: 20px; /* Espacio debajo del texto */
-            color: #000000; /* Color del texto */
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #000000;
         }
+
         /* Botón de WhatsApp flotante */
         .whatsapp-button {
             position: fixed;
@@ -221,7 +231,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>Barber Shop</h1>
+            <h1 id="typed-title">Barber Shop</h1>
         </header>
 
         <div class="logo">
@@ -244,13 +254,13 @@
         </section>
 
         <footer class="footer">
-            <!-- Imagen en la parte baja de la página -->
             <div class="image-container">
                 <img src="static/footer.PNG" alt="footer">
             </div>
         </footer>
     </div>
-<!-- Botón de WhatsApp flotante -->
+
+    <!-- Botón de WhatsApp flotante -->
     <a href="https://wa.me/34625433667" class="whatsapp-button" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
     </a>
