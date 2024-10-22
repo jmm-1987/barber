@@ -237,7 +237,7 @@
             <!-- Texto principal con efecto moderno -->
             <g transform="translate(250,230)">
                 <text x="0" y="0" 
-                    font-family="Arial,sans-serif" 
+                    font-family="Arial, sans-serif" 
                     font-size="32" 
                     fill="#000000" 
                     text-anchor="middle" 
@@ -259,6 +259,7 @@
 
     <div class="header">
         <h1>Selecciona un modelo para probar la aplicación</h1>
+        <p>Selecciona el formato que más te guste y personaliza tu experiencia.</p>
     </div>
 
     <div class="options">
@@ -298,45 +299,6 @@
     <a href="https://wa.me/34625433667" class="whatsapp-button" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
     </a>
-
-    <script>
-        // Mostrar el tooltip al cargar la página
-        const tooltip = document.getElementById('whatsapp-tooltip');
-
-        function showTooltip() {
-            tooltip.classList.add('visible');
-
-            // Ocultar el tooltip después de 5 segundos
-            setTimeout(() => {
-                tooltip.classList.remove('visible');
-            }, 5000);
-        }
-
-        // Mostrar el tooltip al cargar la página
-        window.addEventListener('load', showTooltip);
-
-        // Función para detectar cuándo las cajas están en la vista y aplicar la clase "visible"
-        const featureBoxes = document.querySelectorAll('.feature-box');
-
-        function checkVisibility() {
-            const triggerBottom = window.innerHeight / 1.2;
-
-            featureBoxes.forEach(box => {
-                const boxTop = box.getBoundingClientRect().top;
-
-                if (boxTop < triggerBottom) {
-                    box.classList.add('visible');
-                } else {
-                    box.classList.remove('visible');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', checkVisibility);
-
-        // Ejecutar la función al cargar la página
-        checkVisibility();
-    </script>
 
 </body>
 </html>
