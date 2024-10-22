@@ -41,15 +41,9 @@
         }
 
         .logo-container {
-            margin-bottom: 0px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: center;
-        }
-
-        .logo-container img {
-            max-width: 150px;
-            height: auto;
-            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
         }
 
         .header {
@@ -109,7 +103,6 @@
             }
         }
 
-        /* Estilos para las cajas de características */
         .features {
             margin-top: 50px;
             display: flex;
@@ -125,7 +118,7 @@
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            opacity: 0; /* Inicialmente invisibles para efecto de scroll */
+            opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
@@ -148,14 +141,6 @@
             font-size: 16px;
         }
 
-        @media (max-width: 768px) {
-            .feature-box {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-        }
-
-        /* Botón de WhatsApp flotante */
         .whatsapp-button {
             position: fixed;
             bottom: 20px;
@@ -181,7 +166,6 @@
             height: 35px;
         }
 
-        /* Tooltip para mostrar mensaje */
         .whatsapp-tooltip {
             position: fixed;
             bottom: 90px;
@@ -202,35 +186,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-    
-    .feature-list {
-        list-style-type: none;
-        padding: 0;
-        margin: 10px 0 20px;
-        text-align: left;
-    }
-
-    .feature-list li {
-        font-size: 16px;
-        color: #333;
-        padding-left: 24px;
-        margin-bottom: 8px;
-        position: relative;
-    }
-
-    .feature-list li:before {
-        content: '✔';
-        color: #4CAF50;
-        position: absolute;
-        left: 0;
-    }
-
-    .feature-price {
-        font-size: 22px;
-        font-weight: bold;
-        color: #333333;
-    }
-
 
     </style>
 </head>
@@ -239,71 +194,71 @@
     <!-- Contenedor del logo -->
     <div class="logo-container">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300">
-  <!-- Gradientes -->
-  <defs>
-    <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#00C6FF"/>
-      <stop offset="100%" style="stop-color:#0072FF"/>
-    </linearGradient>
-    <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:0.6"/>
-      <stop offset="100%" style="stop-color:#4A90E2;stop-opacity:0"/>
-    </linearGradient>
-  </defs>
-  
-  <!-- Patrón de circuitos en el fondo -->
-  <path d="M50,150 L150,150 M150,150 L150,200 M150,200 L250,200" 
-        stroke="#1E4B88" stroke-width="1" fill="none" opacity="0.3"/>
-  <path d="M350,100 L450,100 M450,100 L450,150 M450,150 L350,150" 
-        stroke="#1E4B88" stroke-width="1" fill="none" opacity="0.3"/>
+            <!-- Gradientes -->
+            <defs>
+                <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#00C6FF"/>
+                    <stop offset="100%" style="stop-color:#0072FF"/>
+                </linearGradient>
+                <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:0.6"/>
+                    <stop offset="100%" style="stop-color:#4A90E2;stop-opacity:0"/>
+                </linearGradient>
+            </defs>
 
-  <!-- Elemento central hexagonal -->
-  <g transform="translate(250,150)">
-    <!-- Hexágono exterior rotativo -->
-    <path d="M80,0 L40,-69.28 L-40,-69.28 L-80,0 L-40,69.28 L40,69.28 Z" 
-          fill="none" stroke="url(#techGradient)" stroke-width="3">
-      <animateTransform attributeName="transform" type="rotate"
-                      from="0 0 0" to="360 0 0"
-                      dur="20s" repeatCount="indefinite"/>
-    </path>
-    
-    <!-- Hexágono interior -->
-    <path d="M60,0 L30,-51.96 L-30,-51.96 L-60,0 L-30,51.96 L30,51.96 Z" 
-          fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.7"/>
-    
-    <!-- Círculo central con brillo -->
-    <circle cx="0" cy="0" r="35" fill="url(#glowGradient)"/>
-    
-    <!-- Símbolo de código estilizado -->
-    <path d="M-15,-10 L-25,0 L-15,10 M15,-10 L25,0 L15,10" 
-          stroke="#000000" stroke-width="3" fill="none"/>
-  </g>
+            <!-- Patrón de circuitos en el fondo -->
+            <path d="M50,150 L150,150 M150,150 L150,200 M150,200 L250,200" 
+                stroke="#1E4B88" stroke-width="1" fill="none" opacity="0.3"/>
+            <path d="M350,100 L450,100 M450,100 L450,150 M450,150 L350,150" 
+                stroke="#1E4B88" stroke-width="1" fill="none" opacity="0.3"/>
 
-  <!-- Texto principal con efecto moderno -->
-  <g transform="translate(250,230)">
-    <text x="0" y="0" 
-          font-family="Arial, sans-serif" 
-          font-size="32" 
-          fill="#000000" 
-          text-anchor="middle" 
-          font-weight="bold" 
-          letter-spacing="2">
-      JMURILLO
-    </text>
-    <text x="0" y="25" 
-          font-family="Arial, sans-serif" 
-          font-size="18" 
-          fill="#4A90E2" 
-          text-anchor="middle" 
-          letter-spacing="4">
-      tech_studio
-    </text>
-  </g>
-</svg>
+            <!-- Elemento central hexagonal -->
+            <g transform="translate(250,150)">
+                <!-- Hexágono exterior rotativo -->
+                <path d="M80,0 L40,-69.28 L-40,-69.28 L-80,0 L-40,69.28 L40,69.28 Z" 
+                    fill="none" stroke="url(#techGradient)" stroke-width="3">
+                    <animateTransform attributeName="transform" type="rotate"
+                                    from="0 0 0" to="360 0 0"
+                                    dur="20s" repeatCount="indefinite"/>
+                </path>
+
+                <!-- Hexágono interior -->
+                <path d="M60,0 L30,-51.96 L-30,-51.96 L-60,0 L-30,51.96 L30,51.96 Z" 
+                    fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.7"/>
+
+                <!-- Círculo central con brillo -->
+                <circle cx="0" cy="0" r="35" fill="url(#glowGradient)"/>
+
+                <!-- Símbolo de código estilizado -->
+                <path d="M-15,-10 L-25,0 L-15,10 M15,-10 L25,0 L15,10" 
+                    stroke="#000000" stroke-width="3" fill="none"/>
+            </g>
+
+            <!-- Texto principal con efecto moderno -->
+            <g transform="translate(250,230)">
+                <text x="0" y="0" 
+                    font-family="Arial, sans-serif" 
+                    font-size="32" 
+                    fill="#000000" 
+                    text-anchor="middle" 
+                    font-weight="bold" 
+                    letter-spacing="2">
+                    JMURILLO
+                </text>
+                <text x="0" y="25" 
+                    font-family="Arial, sans-serif" 
+                    font-size="18" 
+                    fill="#4A90E2" 
+                    text-anchor="middle" 
+                    letter-spacing="4">
+                    tech_studio
+                </text>
+            </g>
+        </svg>
     </div>
 
     <div class="header">
-        <p>Selecciona un modelo para probar la aplicación</p>
+        <h1>Selecciona un modelo para probar la aplicación</h1>
     </div>
 
     <div class="options">
@@ -334,61 +289,9 @@
         </div>
     </div>
 
-    <!-- Containers para precios de las versiones -->
-    <div class="features">
-    <div class="feature-box dynamic-box" style="background-color: #fefae0;">
-        <h3 class="feature-title">
-            <img src="https://img.icons8.com/color/48/000000/ok--v1.png" alt="icono estándar" style="width: 24px; vertical-align: middle;"> 
-            Versión Estándar
-        </h3>
-        <ul class="feature-list">
-            <li>Gestión de reservas</li>
-            <li>Personalización</li>
-            <li>Galería de fotos</li>
-            <li>Lista de servicios</li>
-            <li>WhatsApp incorporado</li>
-        </ul>
-        <p class="feature-price"><strong>€20/mes</strong></p>
-    </div>
-
-    <div class="feature-box dynamic-box" style="background-color: #f0f8ff;">
-        <h3 class="feature-title">
-            <img src="https://img.icons8.com/color/48/000000/report-file.png" alt="icono informes" style="width: 24px; vertical-align: middle;"> 
-            Versión con Informes
-        </h3>
-        <ul class="feature-list">
-            <li>Gestión de reservas</li>
-            <li>Personalización</li>
-            <li>Galería de fotos</li>
-            <li>Lista de servicios</li>
-            <li>WhatsApp incorporado</li>
-            <li>Registro de usuarios</li>
-            <li>Análisis detellados</li>
-        </ul>
-        <p class="feature-price"><strong>€25/mes</strong></p>
-    </div>
-
-    <div class="feature-box dynamic-box" style="background-color: #e6ffe6;">
-        <h3 class="feature-title">
-            <img src="https://img.icons8.com/color/48/000000/credit-card.png" alt="icono pago" style="width: 24px; vertical-align: middle;"> 
-            Versión con Informes y Pasarela de Pago
-        </h3>
-        <ul class="feature-list">
-            <li>Gestión de reservas</li>
-            <li>Personalización</li>
-            <li>Galería de fotos</li>
-            <li>Lista de servicios</li>
-            <li>WhatsApp incorporado</li>
-            <li>Informes detallados</li>
-            <li>Análisis de rendimiento</li>
-            <li>Pasarela de pago integrada</li>
-        </ul>
-        <p class="feature-price"><strong>€35/mes</strong></p>
-    </div>
-</div>
     <!-- Tooltip con el mensaje de WhatsApp -->
     <div class="whatsapp-tooltip" id="whatsapp-tooltip">
-        ¿dudas? escríbenos
+        ¿Dudas? Escríbenos
     </div>
 
     <!-- Botón de WhatsApp flotante -->
