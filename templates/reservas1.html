@@ -148,7 +148,7 @@
 
     </style>
   </head>
-  <body>
+<body>
     <div class="container">
       <header class="header">
         <h1>Barber Shop</h1>
@@ -196,23 +196,23 @@
       </div>
 
       <footer class="footer">
-            <!-- Imagen en la parte baja de la página -->
-            <div class="image-container">
-                <img src="static/footer.PNG" alt="footer">
-            </div>
-        </footer>
+        <!-- Imagen en la parte baja de la página -->
+        <div class="image-container">
+          <img src="static/footer.PNG" alt="footer">
+        </div>
+      </footer>
     </div>
 
     <!-- Script para Pikaday, selección de hora y llamada al backend -->
     <script>
       let selectedTime = ""; // Variable para almacenar la hora seleccionada
-      let selectedDate = ""; // Variable para almacenar la fecha seleccionada
+      let selectedDate = ""; // Variable para almacenar la fecha seleccionada en YYYY-MM-DD
 
       document.addEventListener("DOMContentLoaded", function () {
         // Inicializar el calendario Pikaday con configuración en español
         var picker = new Pikaday({
           field: document.getElementById("datepicker"),
-          format: "DD/MM/YYYY", // Formato de fecha en dd/mm/aaaa
+          format: "DD/MM/YYYY", // Mostrar la fecha en el formato dd/mm/aaaa
           firstDay: 1, // Comenzar la semana en lunes
           i18n: {
             previousMonth: 'Mes anterior',
@@ -222,8 +222,11 @@
             weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
           },
           onSelect: function () {
-            selectedDate = picker.toString(); // Usamos toString para obtener la fecha seleccionada
-            console.log("Selected date: " + selectedDate);
+            // Convertir la fecha seleccionada al formato YYYY-MM-DD para el backend
+            const formattedDateForBackend = moment(picker.getDate()).format("YYYY-MM-DD");
+            selectedDate = formattedDateForBackend; // Guardar la fecha formateada
+
+            console.log("Selected date for backend: " + selectedDate);
 
             // Llamada al backend para obtener las citas disponibles
             fetch(`/available_hours?date=${selectedDate}`)
@@ -260,7 +263,7 @@
               })
               .catch((error) => {
                 console.error("Error fetching available hours:", error);
-});
+              });
           },
         });
 
@@ -312,7 +315,7 @@
               console.log("Respuesta del servidor:", data);
 
               // Formatear la fecha a DD/MM/YYYY usando Moment.js
-              const formattedDate = moment(selectedDate, "DD/MM/YYYY").format("DD/MM/YYYY");
+              const formattedDate = moment(selectedDate, "YYYY-MM-DD").format("DD/MM/YYYY");
 
               // Crear el mensaje de WhatsApp
               const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${selectedTime}. ¡Te esperamos en la Barbería!`;
