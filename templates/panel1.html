@@ -184,42 +184,61 @@
               let citasOcupadas = ocupadasData.unavailable_hours || [];
               let horasDisponibles = disponiblesData.available_hours || [];
 
-              // Ordenar las citas ocupadas y horas disponibles por la hora
-              citasOcupadas.sort((a, b) => a.hora.localeCompare(b.hora));
-              horasDisponibles.sort((a, b) => a.localeCompare(b));
+              // Combinar las citas ocupadas y las horas disponibles en una sola lista
+              let todasLasCitas = [];
 
-              // Mostrar las citas ocupadas
               citasOcupadas.forEach((cita) => {
-                const citaElement = document.createElement("div");
-                citaElement.className = "cita-element cita-reservada"; // Fondo gris para ocupadas
-                citaElement.innerHTML = `
-                  <p><strong>ID:</strong> ${cita.id}</p>
-                  <p><strong>Nombre:</strong> ${cita.usuario}</p>
-                  <p><strong>Teléfono:</strong> ${cita.telefono}</p>
-                  <p><strong>Fecha:</strong> ${cita.fecha}</p>
-                  <p><strong>Hora:</strong> ${cita.hora}</p>
-                  <div class="button-container">
-                    <button class="modern-button cancelarCitaBtn" data-id="${cita.id}">Cancelar</button>
-                    <a href="tel:${cita.telefono}" class="flex-button">
-                      <i class="fas fa-phone"></i>
-                    </a>
-                    <a href="https://wa.me/${cita.telefono}" class="flex-button">
-                      <i class="fab fa-whatsapp"></i>
-                    </a>
-                  </div>
-                `;
-                citasDiv.appendChild(citaElement);
+                todasLasCitas.push({
+                  tipo: "ocupada",
+                  id: cita.id,
+                  usuario: cita.usuario,
+                  telefono: cita.telefono,
+                  fecha: cita.fecha,
+                  hora: cita.hora
+                });
               });
 
-              // Mostrar las horas disponibles con fondo blanco
-              horasDisponibles.forEach((horaDisponible) => {
-                const citaLibreElement = document.createElement("div");
-                citaLibreElement.className = "cita-element cita-libre"; // Fondo blanco para libres
-                citaLibreElement.innerHTML = `
-                  <p><strong>Hora:</strong> ${horaDisponible}</p>
-                  <p><strong>Nombre:</strong> Libre</p>
-                `;
-                citasDiv.appendChild(citaLibreElement);
+              horasDisponibles.forEach((hora) => {
+                todasLasCitas.push({
+                  tipo: "libre",
+                  hora: hora
+                });
+              });
+
+              // Ordenar todas las citas por hora
+              todasLasCitas.sort((a, b) => moment(a.hora, "HH:mm").diff(moment(b.hora, "HH:mm")));
+
+              // Mostrar todas las citas (ocupadas y libres)
+              todasLasCitas.forEach((cita) => {
+                if (cita.tipo === "ocupada") {
+                  const citaElement = document.createElement("div");
+                  citaElement.className = "cita-element cita-reservada"; // Fondo gris para ocupadas
+                  citaElement.innerHTML = `
+                    <p><strong>ID:</strong> ${cita.id}</p>
+                    <p><strong>Nombre:</strong> ${cita.usuario}</p>
+                    <p><strong>Teléfono:</strong> ${cita.telefono}</p>
+                    <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                    <p><strong>Hora:</strong> ${cita.hora}</p>
+                    <div class="button-container">
+                      <button class="modern-button cancelarCitaBtn" data-id="${cita.id}">Cancelar</button>
+                      <a href="tel:${cita.telefono}" class="flex-button">
+                        <i class="fas fa-phone"></i>
+                      </a>
+                      <a href="https://wa.me/${cita.telefono}" class="flex-button">
+                        <i class="fab fa-whatsapp"></i>
+                      </a>
+                    </div>
+                  `;
+                  citasDiv.appendChild(citaElement);
+                } else {
+                  const citaLibreElement = document.createElement("div");
+                  citaLibreElement.className = "cita-element cita-libre"; // Fondo blanco para libres
+                  citaLibreElement.innerHTML = `
+                    <p><strong>Hora:</strong> ${cita.hora}</p>
+                    <p><strong>Nombre:</strong> Libre</p>
+                  `;
+                  citasDiv.appendChild(citaLibreElement);
+                }
               });
 
               // Asignar eventos de cancelación a las citas ocupadas
@@ -262,7 +281,7 @@
 
       // Función para asignar los eventos de cancelación a los botones de cancelar
       function asignarEventosCancelar() {
-        const botonesCancelar = document.querySelectorAll('.cancelarCitaBtn');
+        const botonesCancelar = documentconst botonesCancelar = document.querySelectorAll('.cancelarCitaBtn');
         botonesCancelar.forEach(boton => {
           boton.addEventListener('click', function () {
             const citaId = this.getAttribute('data-id');
