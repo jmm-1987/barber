@@ -3,7 +3,7 @@ from models import db, Cita  # Usa la instancia de db de models.py
 from flask_jwt_extended import JWTManager
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 # Configuración de la base de datos SQLite
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///peluqueria.db'
