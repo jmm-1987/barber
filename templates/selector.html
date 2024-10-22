@@ -202,6 +202,35 @@
             opacity: 1;
             transform: translateY(0);
         }
+    
+    .feature-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 10px 0 20px;
+        text-align: left;
+    }
+
+    .feature-list li {
+        font-size: 16px;
+        color: #333;
+        padding-left: 24px;
+        margin-bottom: 8px;
+        position: relative;
+    }
+
+    .feature-list li:before {
+        content: '✔';
+        color: #4CAF50;
+        position: absolute;
+        left: 0;
+    }
+
+    .feature-price {
+        font-size: 22px;
+        font-weight: bold;
+        color: #333333;
+    }
+
 
     </style>
 </head>
@@ -213,7 +242,7 @@
     </div>
 
     <div class="header">
-        <p>Selecciona un model para probar la aplicación</p>
+        <p>Selecciona un modelo para probar la aplicación</p>
     </div>
 
     <div class="options">
@@ -244,6 +273,58 @@
         </div>
     </div>
 
+    <!-- Containers para precios de las versiones -->
+    <div class="features">
+    <div class="feature-box dynamic-box" style="background-color: #fefae0;">
+        <h3 class="feature-title">
+            <img src="https://img.icons8.com/color/48/000000/ok--v1.png" alt="icono estándar" style="width: 24px; vertical-align: middle;"> 
+            Versión Estándar
+        </h3>
+        <ul class="feature-list">
+            <li>Gestión de reservas</li>
+            <li>Personalización</li>
+            <li>Galería de fotos</li>
+            <li>Lista de servicios</li>
+            <li>WhatsApp incorporado</li>
+        </ul>
+        <p class="feature-price"><strong>€20/mes</strong></p>
+    </div>
+
+    <div class="feature-box dynamic-box" style="background-color: #f0f8ff;">
+        <h3 class="feature-title">
+            <img src="https://img.icons8.com/color/48/000000/report-file.png" alt="icono informes" style="width: 24px; vertical-align: middle;"> 
+            Versión con Informes
+        </h3>
+        <ul class="feature-list">
+            <li>Gestión de reservas</li>
+            <li>Personalización</li>
+            <li>Galería de fotos</li>
+            <li>Lista de servicios</li>
+            <li>WhatsApp incorporado</li>
+            <li>Registro de usuarios</li>
+            <li>Análisis detellados</li>
+        </ul>
+        <p class="feature-price"><strong>€25/mes</strong></p>
+    </div>
+
+    <div class="feature-box dynamic-box" style="background-color: #e6ffe6;">
+        <h3 class="feature-title">
+            <img src="https://img.icons8.com/color/48/000000/credit-card.png" alt="icono pago" style="width: 24px; vertical-align: middle;"> 
+            Versión con Informes y Pasarela de Pago
+        </h3>
+        <ul class="feature-list">
+            <li>Gestión de reservas</li>
+            <li>Personalización</li>
+            <li>Galería de fotos</li>
+            <li>Lista de servicios</li>
+            <li>WhatsApp incorporado</li>
+            <li>Informes detallados</li>
+            <li>Análisis de rendimiento</li>
+            <li>Pasarela de pago integrada</li>
+        </ul>
+        <p class="feature-price"><strong>€35/mes</strong></p>
+    </div>
+</div>
     <!-- Tooltip con el mensaje de WhatsApp -->
     <div class="whatsapp-tooltip" id="whatsapp-tooltip">
         ¿dudas? escríbenos
