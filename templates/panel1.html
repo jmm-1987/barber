@@ -89,11 +89,11 @@
       }
 
       .cita-reservada {
-        background-color: #b0b0b0; /* Mantener el fondo actual */
+        background-color: #b0b0b0; /* Fondo gris para ocupadas */
       }
 
       .cita-libre {
-        background-color: #ffffff;
+        background-color: #ffffff; /* Fondo blanco para libres */
       }
 
       .cita-element strong {
@@ -130,47 +130,10 @@
         margin-right: 5px;
       }
 
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .modal-content {
-        position: relative;
-        background-color: white;
-        padding: 40px 20px;
-        border-radius: 8px;
-        max-width: 500px;
-        width: 100%;
-      }
-
-      .modal-close {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background-color: red;
-        color: white;
-        padding: 10px;
-        border-radius: 50px;
-        cursor: pointer;
-      }
-
-      .modal-content .content {
-        margin-top: 20px;
-      }
-
-      /* Contenedor para alinear los botones a la derecha */
       .button-container {
         display: flex;
-        justify-content: flex-end;
-        margin-top: 15px;
+        justify-content: space-between;
+        margin-top: 10px;
       }
 
     </style>
@@ -180,11 +143,6 @@
       <header class="header">
         <h1>Barber Shop</h1>
       </header>
-
-      <label for="mostrar_lista">
-        <input type="checkbox" id="mostrar_lista" />
-        Mostrar como lista
-      </label>
 
       <div class="logo">
         <input
@@ -200,13 +158,6 @@
         <div id="citas" class="buttons"></div>
       </section>
 
-      <div class="modal" id="modalCita">
-        <div class="modal-content" id="modalContent">
-          <span class="modal-close" onclick="cerrarModal()">X</span>
-          <div class="content" id="detalleCita"></div>
-        </div>
-      </div>
-
       <footer class="footer">
         <div class="stripe-bar"></div>
       </footer>
@@ -221,125 +172,63 @@
             const selectedDate = picker.toString();
             console.log("Fecha seleccionada: " + selectedDate);
 
-            const mostrarLista = document.getElementById("mostrar_lista").checked;
+            // Hacer ambas solicitudes: una para las citas ocupadas y otra para las horas disponibles
+            Promise.all([
+              fetch(`/unavailable_hours?date=${selectedDate}`).then(response => response.json()),
+              fetch(`/available_hours?date=${selectedDate}`).then(response => response.json())
+            ])
+            .then(([ocupadasData, disponiblesData]) => {
+              const citasDiv = document.getElementById("citas");
+              citasDiv.innerHTML = "";
 
-            if (mostrarLista) {
-              fetch(`/horarios_dia?date=${selectedDate}`)
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error("Error del servidor: " + response.status);
-                  }
-                  return response.json();
-                })
-                .then((data) => {
-                  const citasDiv = document.getElementById("citas");
-                  citasDiv.innerHTML = "";
+              const citasOcupadas = ocupadasData.unavailable_hours || [];
+              const horasDisponibles = disponiblesData.available_hours || [];
 
-                  if (data.horarios && data.horarios.length > 0) {
-                    data.horarios.forEach((horario) => {
-                      const citaElement = document.createElement("div");
+              // Mostrar las citas ocupadas
+              citasOcupadas.forEach((cita) => {
+                const citaElement = document.createElement("div");
+                citaElement.className = "cita-element cita-reservada"; // Fondo gris para ocupadas
+                citaElement.innerHTML = `
+                  <p><strong>ID:</strong> ${cita.id}</p>
+                  <p><strong>Nombre:</strong> ${cita.usuario}</p>
+                  <p><strong>Teléfono:</strong> ${cita.telefono}</p>
+                  <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                  <p><strong>Hora:</strong> ${cita.hora}</p>
+                  <div class="button-container">
+                    <button class="modern-button cancelarCitaBtn" data-id="${cita.id}">Cancelar</button>
+                    <a href="tel:${cita.telefono}" class="flex-button">
+                      <i class="fas fa-phone"></i>
+                    </a>
+                    <a href="https://wa.me/${cita.telefono}" class="flex-button">
+                      <i class="fab fa-whatsapp"></i>
+                    </a>
+                  </div>
+                `;
+                citasDiv.appendChild(citaElement);
+              });
 
-                      if (horario.nombre) {
-                        citaElement.className = "cita-element cita-reservada";
-                      } else {
-                        citaElement.className = "cita-element cita-libre";
-                      }
+              // Mostrar las horas disponibles con fondo blanco
+              horasDisponibles.forEach((horaDisponible) => {
+                const citaLibreElement = document.createElement("div");
+                citaLibreElement.className = "cita-element cita-libre"; // Fondo blanco para libres
+                citaLibreElement.innerHTML = `
+                  <p><strong>Hora:</strong> ${horaDisponible}</p>
+                  <p><strong>Nombre:</strong> Libre</p>
+                `;
+                citasDiv.appendChild(citaLibreElement);
+              });
 
-                      citaElement.innerHTML = `
-                        <p><strong>Hora:</strong> ${horario.hora}</p>
-                        <p><strong>Nombre:</strong> ${horario.nombre || ''}</p>
-                      `;
-                      citasDiv.appendChild(citaElement);
-
-                      if (horario.nombre) {
-                        citaElement.addEventListener('click', function () {
-                          mostrarDetallesCita(horario.id, horario.hora, horario.nombre);
-                        });
-                      }
-                    });
-                  } else {
-                    citasDiv.innerHTML = "<p>No hay horarios disponibles.</p>";
-                  }
-                })
-                .catch((error) => {
-                  console.error("Error al obtener los horarios:", error);
-                });
-            } else {
-              fetch(`/unavailable_hours?date=${selectedDate}`)
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error("Error del servidor: " + response.status);
-                  }
-                  return response.json();
-                })
-                .then((data) => {
-                  const citasDiv = document.getElementById("citas");
-                  citasDiv.innerHTML = "";
-
-                  if (data.unavailable_hours && data.unavailable_hours.length > 0) {
-                    data.unavailable_hours.forEach((cita) => {
-                      const citaElement = document.createElement("div");
-                      citaElement.className = "cita-element cita-reservada";
-                      citaElement.innerHTML = `
-                        <p><strong>ID:</strong> ${cita.id}</p>
-                        <p><strong>Nombre:</strong> ${cita.usuario}</p>
-                        <p><strong>Teléfono:</strong> ${cita.telefono}</p>
-                        <p><strong>Fecha:</strong> ${cita.fecha}</p>
-                        <p><strong>Hora:</strong> ${cita.hora}</p>
-                        <div class="flex justify-between mt-2">
-                          <button class="modern-button cancelarCitaBtn" data-id="${cita.id}">Cancelar</button>
-                          <a href="tel:${cita.telefono}" class="flex-button">
-                            <i class="fas fa-phone"></i>
-                          </a>
-                          <a href="https://wa.me/${cita.telefono}" class="flex-button">
-                            <i class="fab fa-whatsapp"></i>
-                          </a>
-                        </div>
-                      `;
-                      citasDiv.appendChild(citaElement);
-                    });
-                    // Asignar la misma función a todos los botones de cancelar
-                    asignarEventosCancelar();
-                  } else {
-                    citasDiv.innerHTML = "<p>No hay citas reservadas para la fecha seleccionada.</p>";
-                  }
-                })
-                .catch((error) => {
-                  console.error("Error al obtener las citas no disponibles:", error);
-                });
-            }
+              // Asignar eventos de cancelación a las citas ocupadas
+              asignarEventosCancelar();
+            })
+            .catch((error) => {
+              console.error("Error al obtener los datos:", error);
+            });
           },
         });
       });
 
-      // Función para mostrar el modal con detalles de la cita
-      function mostrarDetallesCita(id, hora, nombre) {
-        const modal = document.getElementById("modalCita");
-        const detalleCita = document.getElementById("detalleCita");
-
-        detalleCita.innerHTML = `
-          <p><strong>Hora:</strong> ${hora}</p>
-          <p><strong>Nombre:</strong> ${nombre}</p>
-          <div class="button-container">
-            <a href="tel:123456789" class="flex-button">
-              <i class="fas fa-phone"></i>
-            </a>
-            <a href="https://wa.me/123456789" class="flex-button">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-          </div>
-        `;
-
-        modal.style.display = "flex";
-      }
-
-      // Función para cerrar el modal
-      function cerrarModal() {
-        const modal = document.getElementById("modalCita");
-        modal.style.display = "none";
-      }
-
-      // Función para borrar la cita
+      // Función para cancelar la cita
       function delete_cita(id) {
         const confirmacion = confirm(`¿Estás seguro de que quieres cancelar esta cita?`);
         if (!confirmacion) return;
@@ -351,23 +240,23 @@
           },
           body: JSON.stringify({ id: id }),
         })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Error del servidor: " + response.status);
-            }
-            return response.json();
-          })
-          .then((data) => {
-            alert("Cita cancelada exitosamente");
-            location.reload();
-          })
-          .catch((error) => {
-            console.error("Error al cancelar la cita:", error);
-            alert("Hubo un error al cancelar la cita.");
-          });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error del servidor: " + response.status);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          alert("Cita cancelada exitosamente");
+          location.reload();
+        })
+        .catch((error) => {
+          console.error("Error al cancelar la cita:", error);
+          alert("Hubo un error al cancelar la cita.");
+        });
       }
 
-      // Función para asignar el evento de cancelación a todos los botones "Cancelar"
+      // Función para asignar los eventos de cancelación a los botones de cancelar
       function asignarEventosCancelar() {
         const botonesCancelar = document.querySelectorAll('.cancelarCitaBtn');
         botonesCancelar.forEach(boton => {
