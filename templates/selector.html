@@ -276,6 +276,38 @@
         transform: rotate(360deg);
     }
 }
+/* Estilo para el contenedor centrado de prueba gratuita con recuadro */
+.trial-container {
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+/* Texto principal con estilos dentro del recuadro */
+.trial-container p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0072FF; /* Color azul del logo */
+    padding: 20px;
+    background-color: #ffffff;
+    border: 3px solid;
+    border-image: linear-gradient(45deg, #0072FF, #00C6FF) 1;
+    border-radius: 20px;
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+}
+
+/* Efecto hover para el recuadro */
+.trial-container p:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: #f0f8ff; /* Ligero cambio de fondo al hacer hover */
+}
+
+
 
 /* Estilos para pantallas más pequeñas (responsive) */
 @media (max-width: 768px) {
@@ -364,7 +396,7 @@
     <div class="header">
         <h1></h1>
         <p>Selecciona el formato que más te guste y personaliza tu experiencia.</p>
-        <p>2 semanas de prueba GRATIS y SIN COMPROMISO</p>
+        </br>
     </div>
 
     <div class="options">
@@ -394,6 +426,9 @@
             <h3 class="feature-title">Panel de control</h3>
             <p class="feature-description">Organiza tu día, cancela citas, envía whatsapp a clientes...</p>
         </div>
+    </div>
+    <div class="trial-container">
+        <p>Disfruta de 2 semanas de prueba gratuita sin compromiso</p>
     </div>
 
     <!-- Tooltip con el mensaje de WhatsApp -->
