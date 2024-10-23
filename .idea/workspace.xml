@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="16b52d5e-899e-4204-8668-7bbfdf15b2b1" name="Changes" comment="presentacion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/selector.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/selector.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,7 +307,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729668626870</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="presentacion">
+      <option name="closed" value="true" />
+      <created>1729678196757</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1729678196757</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
