@@ -202,68 +202,68 @@
 
     <!-- Contenedor del logo -->
     <div class="logo-container">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300">
-            <!-- Gradientes -->
-            <defs>
-                <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%">
-                    <stop offset="0%" style="stop-color:#00C6FF"/>
-                    <stop offset="100%" style="stop-color:#0072FF"/>
-                </linearGradient>
-                <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%">
-                    <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:0.6"/>
-                    <stop offset="100%" style="stop-color:#4A90E2;stop-opacity:0"/>
-                </linearGradient>
-            </defs>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- Gradientes -->
+  <defs>
+    <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00C6FF"/>
+      <stop offset="100%" style="stop-color:#0072FF"/>
+    </linearGradient>
+    <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#4A90E2;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Patrón de circuitos en el fondo -->
+  <path d="M25,100 L125,100 M125,100 L125,150 M125,150 L225,150" 
+        stroke="#1E4B88" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M275,50 L375,50 M375,50 L375,100 M375,100 L275,100" 
+        stroke="#1E4B88" stroke-width="1" fill="none" opacity="0.3"/>
 
-            <!-- Patrón de circuitos en el fondo -->
-            <path d="M50,150 L150,150 M150,150 L150,200 M150,200 L250,200" 
-                stroke="#1E4B88" stroke-width="1" fill="none" opacity="0.3"/>
-            <path d="M350,100 L450,100 M450,100 L450,150 M450,150 L350,150" 
-                stroke="#1E4B88" stroke-width="1" fill="none" opacity="0.3"/>
+  <!-- Elemento central hexagonal -->
+  <g transform="translate(200,90)">
+    <!-- Hexágono exterior rotativo -->
+    <path d="M80,0 L40,-69.28 L-40,-69.28 L-80,0 L-40,69.28 L40,69.28 Z" 
+          fill="none" stroke="url(#techGradient)" stroke-width="3">
+      <animateTransform attributeName="transform" type="rotate"
+                      from="0 0 0" to="360 0 0"
+                      dur="20s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Hexágono interior -->
+    <path d="M60,0 L30,-51.96 L-30,-51.96 L-60,0 L-30,51.96 L30,51.96 Z" 
+          fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.7"/>
+    
+    <!-- Círculo central con brillo -->
+    <circle cx="0" cy="0" r="35" fill="url(#glowGradient)"/>
+    
+    <!-- Símbolo de código estilizado -->
+    <path d="M-15,-10 L-25,0 L-15,10 M15,-10 L25,0 L15,10" 
+          stroke="#FFFFFF" stroke-width="3" fill="none"/>
+  </g>
 
-            <!-- Elemento central hexagonal -->
-            <g transform="translate(250,150)">
-                <!-- Hexágono exterior rotativo -->
-                <path d="M80,0 L40,-69.28 L-40,-69.28 L-80,0 L-40,69.28 L40,69.28 Z" 
-                    fill="none" stroke="url(#techGradient)" stroke-width="3">
-                    <animateTransform attributeName="transform" type="rotate"
-                                    from="0 0 0" to="360 0 0"
-                                    dur="20s" repeatCount="indefinite"/>
-                </path>
-
-                <!-- Hexágono interior -->
-                <path d="M60,0 L30,-51.96 L-30,-51.96 L-60,0 L-30,51.96 L30,51.96 Z" 
-                    fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.7"/>
-
-                <!-- Círculo central con brillo -->
-                <circle cx="0" cy="0" r="35" fill="url(#glowGradient)"/>
-
-                <!-- Símbolo de código estilizado -->
-                <path d="M-15,-10 L-25,0 L-15,10 M15,-10 L25,0 L15,10" 
-                    stroke="#000000" stroke-width="3" fill="none"/>
-            </g>
-
-            <!-- Texto principal con efecto moderno -->
-            <g transform="translate(250,230)">
-                <text x="0" y="0" 
-                    font-family="Arial, sans-serif" 
-                    font-size="32" 
-                    fill="#000000" 
-                    text-anchor="middle" 
-                    font-weight="bold" 
-                    letter-spacing="2">
-                    JMURILLO
-                </text>
-                <text x="0" y="25" 
-                    font-family="Arial, sans-serif" 
-                    font-size="18" 
-                    fill="#4A90E2" 
-                    text-anchor="middle" 
-                    letter-spacing="4">
-                    tech_studio
-                </text>
-            </g>
-        </svg>
+  <!-- Texto principal con efecto moderno -->
+  <g transform="translate(200,170)">
+    <text x="0" y="0" 
+          font-family="Arial, sans-serif" 
+          font-size="32" 
+          fill="#000000" 
+          text-anchor="middle" 
+          font-weight="bold" 
+          letter-spacing="2">
+      JMURILLO
+    </text>
+    <text x="0" y="25" 
+          font-family="Arial, sans-serif" 
+          font-size="18" 
+          fill="#4A90E2" 
+          text-anchor="middle" 
+          letter-spacing="4">
+      tech_studio
+    </text>
+  </g>
+</svg>
     </div>
 
     <div class="header">
