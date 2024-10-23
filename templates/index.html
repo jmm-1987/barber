@@ -1,66 +1,193 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Epilogue:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700;900"
-    />
-    <title>Peluquería</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  </head>
-  <body class="m-0 p-0 overflow-hidden">
-    <div class="relative flex flex-col min-h-screen bg-white group/design-root overflow-hidden" style='font-family: Epilogue, "Noto Sans", sans-serif;'>
-      <header class="flex items-center bg-white p-4 justify-between">
-        <h2 class="text-[#181114] text-2xl font-bold font-oswald text-left flex-1">Barber Shop</h2>
-        <button class="flex items-center justify-center rounded-full h-12 bg-transparent text-[#181114] text-base font-bold">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-            <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM176,88a48,48,0,0,1-96,0,8,8,0,0,1,16,0,32,32,0,0,0,64,0,8,8,0,0,1,16,0Z" />
-          </svg>
-        </button>
-      </header>
-      <div class="flex-grow p-0 m-0">
-        <!-- Aquí he actualizado la URL de la imagen de fondo -->
-        <div class="w-screen h-screen bg-cover bg-center flex flex-col justify-end overflow-hidden relative"
-          style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 25%),
-            url('/static/Barber.png'); background-size: cover;">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Formato - Barber Shop</title>
 
-          <!-- Contenedor de botones centrados -->
-          <div class="absolute inset-0 flex justify-center items-center">
-            <div class="flex gap-4 relative z-10"> <!-- z-10 asegura que los botones y la imagen se superponen correctamente -->
-              <a href="/reservas">
-                <button class="flex items-center justify-center rounded-full h-16 sm:h-20 md:h-24 lg:h-28 px-8 sm:px-10 md:px-12 lg:px-14 bg-[#097DAC] text-white text-base font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl">
-                  Reservar cita
-                </button>
-              </a>
-              <a href="/servicios">
-                <button class="flex items-center justify-center rounded-full h-16 sm:h-20 md:h-24 lg:h-28 px-8 sm:px-10 md:px-12 lg:px-14 bg-[#950F1C] text-white text-base font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl">
-                  Servicios
-                </button>
-              </a>
-              <a href="/panel">
-                <button class="flex items-center justify-center rounded-full h-16 sm:h-20 md:h-24 lg:h-28 px-8 sm:px-10 md:px-12 lg:px-14 bg-[#950F1C] text-white text-base font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl">
-                  Admin
-                </button>
-              </a>
-            </div>
-          </div>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
 
-          <!-- Imagen superpuesta -->
-          <div class="absolute top-1/4 left-1/3 transform -translate-x-1/2 -translate-y-1/2 z-20">
-            <img src="/static/chica.webp" alt="Imagen más grande" class="rounded-full w-120 h-120 object-cover border-4 border-white shadow-lg" />
-          </div>
+        body {
+            background-color: #f0f0f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: auto;
+            overflow-x: hidden;
+            padding: 10px;
+        }
 
-          <div class="p-4">
-            <p class="text-white text-[28px] font-bold">Studio 17</p>
-          </div>
-        </div> <!-- Aquí cerramos el div del fondo de pantalla -->
-      </div> <!-- Cerramos el div que contiene el fondo de pantalla -->
+        .logo-container {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            width: 90%;
+            height: 150px;
+        }
 
-      <div class="h-5 bg-white"></div> <!-- Añadimos el footer o espacio blanco inferior -->
-    </div> <!-- Cerramos el div principal de la página -->
-  </body>
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #2d2d2d;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            color: #5f5f5f;
+            margin-top: 10px;
+        }
+
+        /* Estilos para el selector de categorías */
+        .category-selector {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .category-selector select {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 10px;
+            border: 2px solid #0072FF;
+            outline: none;
+        }
+
+        /* Ocultar todas las categorías inicialmente */
+        .category {
+            display: none;
+        }
+
+        /* Mostrar la categoría activa */
+        .category.show {
+            display: flex;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .option {
+            width: 300px;
+            height: 600px;
+            cursor: pointer;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+
+        .option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .option:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
+            border-color: #d0d0d5;
+        }
+
+        @media (max-width: 768px) {
+            .option {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del logo -->
+    <div class="logo-container">
+        <!-- Aquí puedes insertar tu logotipo si lo deseas -->
+    </div>
+
+    <div class="header">
+        <h1>Seleccionar Formato</h1>
+        <p>Selecciona el formato que más te guste y personaliza tu experiencia.</p>
+    </div>
+
+    <div class="category-selector">
+        <label for="category">Selecciona una categoría:</label>
+        <select id="category" onchange="changeCategory()">
+            <option value="haircuts">Peluquerías</option>
+            <option value="physiotherapy">Centro de Fisioterapia</option>
+            <option value="nail-center">Centro de Uñas</option>
+        </select>
+    </div>
+
+    <!-- Opciones de peluquerías -->
+    <div class="options category" id="haircuts">
+        <a href="/modelo1" class="option">
+            <img src="static/modelo1.PNG" alt="Formato 1">
+        </a>
+        <a href="/modelo2" class="option">
+            <img src="static/modelo2.PNG" alt="Formato 2">
+        </a>
+        <a href="/modelo3" class="option">
+            <img src="static/modelo3.PNG" alt="Formato 3">
+        </a>
+    </div>
+
+    <!-- Opciones de centro de fisioterapia -->
+    <div class="options category" id="physiotherapy">
+        <a href="/modelo7" class="option">
+            <img src="static/modelo7.PNG" alt="Formato 1 Centro de Fisioterapia">
+        </a>
+        <a href="/modelo8" class="option">
+            <img src="static/modelo8.PNG" alt="Formato 2 Centro de Fisioterapia">
+        </a>
+        <a href="/modelo9" class="option">
+            <img src="static/modelo9.PNG" alt="Formato 3 Centro de Fisioterapia">
+        </a>
+    </div>
+
+    <!-- Opciones de centro de uñas -->
+    <div class="options category" id="nail-center">
+        <a href="/modelo10" class="option">
+            <img src="static/modelo10.PNG" alt="Formato 1 Centro de Uñas">
+        </a>
+        <a href="/modelo11" class="option">
+            <img src="static/modelo11.PNG" alt="Formato 2 Centro de Uñas">
+        </a>
+        <a href="/modelo12" class="option">
+            <img src="static/modelo12.PNG" alt="Formato 3 Centro de Uñas">
+        </a>
+    </div>
+
+    <script>
+        function changeCategory() {
+            const selectedCategory = document.getElementById('category').value;
+
+            // Ocultar todas las categorías
+            const categories = document.querySelectorAll('.category');
+            categories.forEach(category => category.classList.remove('show'));
+
+            // Mostrar la categoría seleccionada
+            document.getElementById(selectedCategory).classList.add('show');
+        }
+
+        // Mostrar solo la categoría por defecto (Peluquerías) al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('haircuts').classList.add('show');
+        });
+    </script>
+</body>
 </html>

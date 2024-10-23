@@ -74,6 +74,36 @@
             color: #5f5f5f;
             margin-top: 10px;
         }
+         .category-selector {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .category-selector button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 0 10px;
+            border-radius: 10px;
+            border: 2px solid #0072FF;
+            background-color: #0072FF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .category-selector button:hover {
+            background-color: #005bb5;
+        }
+
+        /* Ocultar todas las categorías inicialmente */
+        .category {
+            display: none;
+        }
+
+        /* Mostrar la categoría activa */
+        .category.show {
+            display: flex;
+        }
 
         .options {
             display: flex;
@@ -89,10 +119,7 @@
             cursor: pointer;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             background-color: #ffffff;
-            border: 2px solid #e0e0e0;
         }
 
         .option img {
@@ -440,51 +467,51 @@
       <stop offset="100%" style="stop-color:#4A90E2;stop-opacity:0"/>
     </linearGradient>
   </defs>
-  
+
   <!-- Patrón de circuitos en el fondo -->
-  <path d="M25,100 L125,100 M125,100 L125,150 M125,150 L225,150" 
+  <path d="M25,100 L125,100 M125,100 L125,150 M125,150 L225,150"
         stroke="#1E4B88" stroke-width="1" fill="none" opacity="0.3"/>
-  <path d="M275,50 L375,50 M375,50 L375,100 M375,100 L275,100" 
+  <path d="M275,50 L375,50 M375,50 L375,100 M375,100 L275,100"
         stroke="#1E4B88" stroke-width="1" fill="none" opacity="0.3"/>
 
   <!-- Elemento central hexagonal -->
   <g transform="translate(200,90)">
     <!-- Hexágono exterior rotativo -->
-    <path d="M80,0 L40,-69.28 L-40,-69.28 L-80,0 L-40,69.28 L40,69.28 Z" 
+    <path d="M80,0 L40,-69.28 L-40,-69.28 L-80,0 L-40,69.28 L40,69.28 Z"
           fill="none" stroke="url(#techGradient)" stroke-width="3">
       <animateTransform attributeName="transform" type="rotate"
                       from="0 0 0" to="360 0 0"
                       dur="20s" repeatCount="indefinite"/>
     </path>
-    
+
     <!-- Hexágono interior -->
-    <path d="M60,0 L30,-51.96 L-30,-51.96 L-60,0 L-30,51.96 L30,51.96 Z" 
+    <path d="M60,0 L30,-51.96 L-30,-51.96 L-60,0 L-30,51.96 L30,51.96 Z"
           fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.7"/>
-    
+
     <!-- Círculo central con brillo -->
     <circle cx="0" cy="0" r="35" fill="url(#glowGradient)"/>
-    
+
     <!-- Símbolo de código estilizado -->
-    <path d="M-15,-10 L-25,0 L-15,10 M15,-10 L25,0 L15,10" 
+    <path d="M-15,-10 L-25,0 L-15,10 M15,-10 L25,0 L15,10"
           stroke="#FFFFFF" stroke-width="3" fill="none"/>
   </g>
 
   <!-- Texto principal con efecto moderno -->
   <g transform="translate(200,170)">
-    <text x="0" y="0" 
-          font-family="Arial, sans-serif" 
-          font-size="32" 
-          fill="#000000" 
-          text-anchor="middle" 
-          font-weight="bold" 
+    <text x="0" y="0"
+          font-family="Arial, sans-serif"
+          font-size="32"
+          fill="#000000"
+          text-anchor="middle"
+          font-weight="bold"
           letter-spacing="2">
       JMURILLO
     </text>
-    <text x="0" y="25" 
-          font-family="Arial, sans-serif" 
-          font-size="18" 
-          fill="#4A90E2" 
-          text-anchor="middle" 
+    <text x="0" y="25"
+          font-family="Arial, sans-serif"
+          font-size="18"
+          fill="#4A90E2"
+          text-anchor="middle"
           letter-spacing="4">
       tech_studio
     </text>
@@ -498,17 +525,18 @@
         </br>
     </div>
 
-    <div class="options">
-        <a href="/modelo1" class="option">
-            <img src="static/modelo1.PNG" alt="Formato 1">
-        </a>
-        <a href="/modelo2" class="option">
-            <img src="static/modelo2.PNG" alt="Formato 2">
-        </a>
-        <a href="/modelo3" class="option">
-            <img src="static/modelo3.PNG" alt="Formato 3">
-        </a>
+    <div class="options category" id="haircuts">
+    <a href="/modelo1" class="option">
+        <img src="static/modelo1.PNG" alt="Formato 1">
+    </a>
+    <a href="/modelo2" class="option">
+        <img src="static/modelo2.PNG" alt="Formato 2">
+    </a>
+    <a href="/modelo3" class="option">
+        <img src="static/modelo3.PNG" alt="Formato 3">
+    </a>
     </div>
+
     <div class="features">
         <div class="feature-box">
             <img src="static/calendario.png" alt="Logo 1" class="feature-logo">
@@ -532,33 +560,44 @@
      <div class="pricing-plans">
     <div class="plan-box">
         <h3 class="plan-title">Standard</h3>
-        <img src="static/standard.png" alt="Standard Logo" class="plan-logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/2913/2913407.png" alt="Chatbot Logo" class="plan-logo" style="background-color: bronze; border-radius: 50%; padding: 10px;">
         <ul class="plan-features">
             <li><i class="fas fa-check"></i> Gestión de citas</li>
-            <li><i class="fas fa-check"></i> Recordatorios automáticos</li>
-            <li><i class="fas fa-check"></i> Hasta 5 usuarios</li>
+            <li><i class="fas fa-check"></i> Diseño personalizado</li>
+            <li><i class="fas fa-check"></i> Recordatorios clientes</li>
+            <li><i class="fas fa-check"></i> Panel de control</li>
+            <li><i class="fas fa-check"></i> Whatsapp incorporado</li>
         </ul>
         <p class="plan-price">€19/mes</p>
     </div>
 
     <div class="plan-box">
         <h3 class="plan-title">Informes</h3>
-        <img src="static/informes.png" alt="Informes Logo" class="plan-logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/1234/1234704.png" alt="Informes Logo" class="plan-logo" style="background-color: silver; border-radius: 50%; padding: 10px;">
         <ul class="plan-features">
-            <li><i class="fas fa-check"></i> Informes detallados</li>
-            <li><i class="fas fa-check"></i> Análisis de clientes</li>
-            <li><i class="fas fa-check"></i> Gráficos personalizados</li>
+            <li><i class="fas fa-check"></i> Gestión de citas</li>
+            <li><i class="fas fa-check"></i> Diseño personalizado</li>
+            <li><i class="fas fa-check"></i> Recordatorios clientes</li>
+            <li><i class="fas fa-check"></i> Panel de control</li>
+            <li><i class="fas fa-check"></i> Whatsapp incorporado</li>
+            <li><i class="fas fa-check"></i> Registro de clientes</li>
+            <li><i class="fas fa-check"></i> Informes personalizados</li>
         </ul>
         <p class="plan-price">€29/mes</p>
     </div>
 
     <div class="plan-box">
         <h3 class="plan-title">Chatbot</h3>
-        <img src="static/chatbot.png" alt="Chatbot Logo" class="plan-logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" alt="Premium Logo" class="plan-logo" style="background-color: gold; border-radius: 50%; padding: 10px;">
         <ul class="plan-features">
-            <li><i class="fas fa-check"></i> Chatbot de atención</li>
-            <li><i class="fas fa-check"></i> Respuestas automáticas</li>
-            <li><i class="fas fa-check"></i> Integración con WhatsApp</li>
+            <li><i class="fas fa-check"></i> Gestión de citas</li>
+            <li><i class="fas fa-check"></i> Diseño personalizado</li>
+            <li><i class="fas fa-check"></i> Recordatorios clientes</li>
+            <li><i class="fas fa-check"></i> Panel de control</li>
+            <li><i class="fas fa-check"></i> Whatsapp incorporado</li>
+            <li><i class="fas fa-check"></i> Registro de clientes</li>
+            <li><i class="fas fa-check"></i> Informes personalizados</li>
+            <li><i class="fas fa-check"></i> Chatbot incluido</li>
         </ul>
         <p class="plan-price">€39/mes</p>
     </div>
@@ -574,6 +613,7 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
     </a>
 <script>
+
     window.addEventListener('scroll', function() {
         const featureBoxes = document.querySelectorAll('.feature-box');
         const triggerBottom = window.innerHeight / 5 * 4;
