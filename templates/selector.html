@@ -447,6 +447,26 @@
     margin-top: 20px;
     text-align: center;
 }
+        .plan-logo-number {
+    width: 80px;
+    height: 80px;
+    background-color: black; /* Color de fondo */
+    color: #fff; /* Color de texto */
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px; /* Centra el número y añade espacio inferior */
+    border-radius: 50%; /* Hace el div redondo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Efecto de hover */
+}
+
+.plan-logo-number:hover {
+    background-color: #00C6FF; /* Cambia el color al hacer hover */
+    transform: scale(1.1); /* Aumenta el tamaño ligeramente */
+}
 
 
     </style>
@@ -560,20 +580,24 @@
      <div class="pricing-plans">
     <div class="plan-box">
         <h3 class="plan-title">Standard</h3>
-        <img src="https://cdn-icons-png.flaticon.com/512/2913/2913407.png" alt="Chatbot Logo" class="plan-logo" style="background-color: bronze; border-radius: 50%; padding: 10px;">
+        <div class="plan-logo-number">1</div>
         <ul class="plan-features">
             <li><i class="fas fa-check"></i> Gestión de citas</li>
             <li><i class="fas fa-check"></i> Diseño personalizado</li>
             <li><i class="fas fa-check"></i> Recordatorios clientes</li>
             <li><i class="fas fa-check"></i> Panel de control</li>
             <li><i class="fas fa-check"></i> Whatsapp incorporado</li>
+            <li>.</li>
+            <li>.</li>
+            <li>.</li>
+            <li>.</li>
         </ul>
         <p class="plan-price">€19/mes</p>
     </div>
 
     <div class="plan-box">
         <h3 class="plan-title">Informes</h3>
-        <img src="https://cdn-icons-png.flaticon.com/512/1234/1234704.png" alt="Informes Logo" class="plan-logo" style="background-color: silver; border-radius: 50%; padding: 10px;">
+        <div class="plan-logo-number">2</div>
         <ul class="plan-features">
             <li><i class="fas fa-check"></i> Gestión de citas</li>
             <li><i class="fas fa-check"></i> Diseño personalizado</li>
@@ -582,13 +606,15 @@
             <li><i class="fas fa-check"></i> Whatsapp incorporado</li>
             <li><i class="fas fa-check"></i> Registro de clientes</li>
             <li><i class="fas fa-check"></i> Informes personalizados</li>
+            <li><i class="fas fa-check"></i> Informes personalizados</li>
+            <li>.</li>
         </ul>
         <p class="plan-price">€29/mes</p>
     </div>
 
     <div class="plan-box">
         <h3 class="plan-title">Chatbot</h3>
-        <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" alt="Premium Logo" class="plan-logo" style="background-color: gold; border-radius: 50%; padding: 10px;">
+        <div class="plan-logo-number">3</div>
         <ul class="plan-features">
             <li><i class="fas fa-check"></i> Gestión de citas</li>
             <li><i class="fas fa-check"></i> Diseño personalizado</li>
@@ -612,6 +638,10 @@
     <a href="https://wa.me/34625433667" class="whatsapp-button" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
     </a>
+    </br>
+    <footer class="footer">
+    <p>&copy; 2024 Jonatan Murillo Mateo. Todos los derechos reservados.</p>
+    </footer>
 <script>
 
     window.addEventListener('scroll', function() {
