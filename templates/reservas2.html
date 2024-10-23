@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reservas - Barber Shop Vintage</title>
 
+    <!-- Fuente para darle estilo retro -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
     <!-- Moment.js -->
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
@@ -19,7 +22,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Courier New', Courier, monospace;
+        font-family: 'Courier New', Courier, monospace; /* Opción retro */
       }
 
       body {
@@ -80,6 +83,9 @@
         border: 2px solid #4e3629; /* Borde vintage */
         border-radius: 8px;
         padding: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 400px;
       }
 
       .active-btn {
@@ -87,12 +93,19 @@
         color: white !important;
         border: 2px solid black;
       }
+
+      .buttons-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 20px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <header class="header">
-        <h1>BARBER SHOP</h1>
+        <h1>BARBER SHOP VINTAGE</h1>
       </header>
 
       <!-- Calendario interactivo -->
@@ -100,15 +113,14 @@
         <input
           type="text"
           id="datepicker"
-          class="form-input w-full h-12 rounded-xl p-4 mb-4"
+          class="form-input"
           placeholder="Selecciona una fecha"
         />
       </div>
 
       <!-- Citas dinámicas -->
-      <section class="buttons">
-        <h2 class="text-lg font-bold">Selecciona la hora</h2>
-        <div id="citas" class="grid grid-cols-2 gap-4"></div>
+      <section class="buttons-container" id="citas">
+        <!-- Aquí se cargarán los botones de las horas disponibles -->
       </section>
 
       <!-- Datos del usuario -->
@@ -117,17 +129,17 @@
           type="text"
           id="nombre"
           placeholder="Nombre y apellido"
-          class="form-input w-full h-12 mb-4"
+          class="form-input"
         />
         <input
           type="text"
           id="telefono"
           placeholder="Teléfono"
-          class="form-input w-full h-12 mb-4"
+          class="form-input"
         />
         <button
           id="confirmBtn"
-          class="vintage-button w-full h-12"
+          class="vintage-button"
         >
           Confirmar reserva
         </button>
@@ -147,10 +159,19 @@
         // Inicializar el calendario Pikaday
         var picker = new Pikaday({
           field: document.getElementById("datepicker"),
-          format: "YYYY-MM-DD",
+          format: "DD/MM/YYYY", // Mostrar la fecha en el formato dd/mm/aaaa
+          firstDay: 1, // Comenzar la semana en lunes
+          i18n: {
+            previousMonth: 'Mes anterior',
+            nextMonth: 'Mes siguiente',
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+          },
           onSelect: function () {
-            selectedDate = picker.toString(); // Usamos toString para obtener la fecha seleccionada
-            console.log("Selected date: " + selectedDate);
+            selectedDate = moment(picker.getDate()).format("YYYY-MM-DD");
+
+            console.log("Selected date for backend: " + selectedDate);
 
             // Llamada al backend para obtener las citas disponibles
             fetch(`/available_hours?date=${selectedDate}`)
@@ -167,17 +188,16 @@
                 if (data && data.available_hours.length > 0) {
                   data.available_hours.forEach((hora) => {
                     const citaButton = document.createElement("button");
-                    citaButton.className = "w-full h-12 vintage-button"; // Usar el estilo vintage-button
+                    citaButton.className = "vintage-button"; // Usar el estilo vintage
                     citaButton.innerText = hora;
                     citaButton.onclick = function () {
-                      selectedTime = hora; // Almacenar la hora seleccionada
-                      console.log("Selected time: " + selectedTime);
+                      selectedTime = hora;
 
                       // Desmarcar todos los botones y marcar solo el seleccionado
                       document.querySelectorAll('#citas button').forEach(btn => {
                         btn.classList.remove('active-btn');
                       });
-                      citaButton.classList.add('active-btn'); // Marcar el botón seleccionado
+                      citaButton.classList.add('active-btn');
                     };
                     citasDiv.appendChild(citaButton);
                   });
@@ -191,17 +211,24 @@
           },
         });
 
-        // Función que se ejecuta al confirmar la cita
         document.getElementById("confirmBtn").addEventListener("click", function () {
           const nombre = document.getElementById("nombre").value;
-          const telefono = document.getElementById("telefono").value;
+          let telefono = document.getElementById("telefono").value;
 
           if (!nombre || !telefono || !selectedDate || !selectedTime) {
             alert("Por favor, completa todos los campos y selecciona una hora.");
             return;
           }
 
-          // Crear el objeto JSON con los datos de la cita
+          const telefonoValido = /^[0-9]{9}$/;
+
+          if (!telefonoValido.test(telefono)) {
+            alert("El número de teléfono debe contener 9 dígitos.");
+            return;
+          }
+
+          telefono = "+34" + telefono;
+
           const citaData = {
             usuario: nombre,
             telefono: telefono,
@@ -209,17 +236,16 @@
             hora: selectedTime
           };
 
-          // Hacer la llamada al backend para crear la cita
           fetch('/add_cita', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(citaData) // Enviar los datos de la cita
+            body: JSON.stringify(citaData)
           })
             .then((response) => {
               if (!response.ok) {
-                throw new Error("Server error: " + response.status);
+                throw new Error("Error del servidor: " + response.status);
               }
               return response.json();
             })
@@ -227,17 +253,12 @@
               alert("Cita confirmada con éxito");
               console.log("Respuesta del servidor:", data);
 
-              // Formatear la fecha a DD/MM/YYYY usando Moment.js
               const formattedDate = moment(selectedDate).format("DD/MM/YYYY");
 
-              // Crear el mensaje de WhatsApp
               const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${selectedTime}. ¡Te esperamos en la Barbería!`;
               const whatsappURL = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
 
-              // Abrir WhatsApp con el mensaje
               window.open(whatsappURL, '_blank');
-
-              // Redirigir al index después de confirmar la cita
               window.location.href = '/modelo2'; // Aquí puedes poner la URL de tu página de inicio
             })
             .catch((error) => {
@@ -249,4 +270,3 @@
     </script>
   </body>
 </html>
-
