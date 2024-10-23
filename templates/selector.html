@@ -11,6 +11,8 @@
       gtag('config', 'G-9ZND42296P');
     </script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar Formato - Barber Shop</title>
@@ -321,6 +323,103 @@
         margin-bottom: 20px; /* Espacio entre los contenedores */
     }
 }
+/* Estilos para el contenedor de los planes de precios */
+.pricing-plans {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+}
+
+/* Estilo para cada caja de plan */
+.plan-box {
+    width: 30%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #0072FF; /* Borde fino con el color azul del logo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.plan-box:hover {
+    background: linear-gradient(135deg, #00C6FF, #0072FF); /* Fondo gradiente al hacer hover */
+    transform: translateY(-10px); /* Elevación suave */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Aumentar sombra en hover */
+    color: #ffffff; /* Cambiar color del texto al hacer hover */
+}
+
+.plan-title, .plan-price, .plan-features li {
+    transition: color 0.3s ease; /* Transición suave del color del texto */
+}
+
+.plan-box:hover .plan-title,
+.plan-box:hover .plan-price,
+.plan-box:hover .plan-features li {
+    color: #ffffff; /* Cambiar color del texto al blanco al hacer hover */
+}
+
+/* Títulos de los planes */
+.plan-title {
+    font-size: 24px;
+    color: #0072FF; /* Color azul del logo */
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Logos de los planes */
+.plan-logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+/* Lista de características */
+.plan-features {
+    list-style: none;
+    padding-left: 0;
+    font-size: 16px;
+    color: #5f5f5f;
+}
+
+.plan-features li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.plan-features i {
+    color: #0072FF; /* Color azul para los íconos de check */
+    margin-right: 10px;
+}
+
+/* Estilo para el precio del plan */
+.plan-price {
+    font-size: 20px;
+    color: #000; /* Color negro para el precio */
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Estilos para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .plan-box {
+        width: 90%; /* Se ajusta el ancho para pantallas más pequeñas */
+        margin-bottom: 20px;
+    }
+}
+        /* Estilo para el precio del plan */
+.plan-price {
+    font-size: 20px;
+    color: #000; /* Color negro para el precio */
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
 
 
     </style>
@@ -430,6 +529,40 @@
     <div class="trial-container">
         <p>Disfruta de 2 semanas de prueba gratuita sin compromiso</p>
     </div>
+     <div class="pricing-plans">
+    <div class="plan-box">
+        <h3 class="plan-title">Standard</h3>
+        <img src="static/standard.png" alt="Standard Logo" class="plan-logo">
+        <ul class="plan-features">
+            <li><i class="fas fa-check"></i> Gestión de citas</li>
+            <li><i class="fas fa-check"></i> Recordatorios automáticos</li>
+            <li><i class="fas fa-check"></i> Hasta 5 usuarios</li>
+        </ul>
+        <p class="plan-price">€19/mes</p>
+    </div>
+
+    <div class="plan-box">
+        <h3 class="plan-title">Informes</h3>
+        <img src="static/informes.png" alt="Informes Logo" class="plan-logo">
+        <ul class="plan-features">
+            <li><i class="fas fa-check"></i> Informes detallados</li>
+            <li><i class="fas fa-check"></i> Análisis de clientes</li>
+            <li><i class="fas fa-check"></i> Gráficos personalizados</li>
+        </ul>
+        <p class="plan-price">€29/mes</p>
+    </div>
+
+    <div class="plan-box">
+        <h3 class="plan-title">Chatbot</h3>
+        <img src="static/chatbot.png" alt="Chatbot Logo" class="plan-logo">
+        <ul class="plan-features">
+            <li><i class="fas fa-check"></i> Chatbot de atención</li>
+            <li><i class="fas fa-check"></i> Respuestas automáticas</li>
+            <li><i class="fas fa-check"></i> Integración con WhatsApp</li>
+        </ul>
+        <p class="plan-price">€39/mes</p>
+    </div>
+</div>
 
     <!-- Tooltip con el mensaje de WhatsApp -->
     <div class="whatsapp-tooltip" id="whatsapp-tooltip">
