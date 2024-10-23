@@ -14,7 +14,7 @@
     <!-- Pikaday JS -->
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
 
-    <!-- Pikaday CSS -->
+    <!-- Pikaday CSS (modificar después) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
 
     <style>
@@ -87,6 +87,7 @@
         border: 2px solid #4e3629; /* Borde vintage */
         border-radius: 8px;
         padding: 10px;
+        margin-bottom: 20px;
       }
 
       .active-btn {
@@ -97,6 +98,37 @@
 
       a {
         text-decoration: none; /* Elimina el subrayado en los enlaces */
+      }
+
+      /* Personalizar el calendario Pikaday */
+      .pika-single {
+        background-color: #f5f0e1 !important; /* Fondo crema para el calendario */
+        border: 2px solid #4e3629; /* Borde vintage */
+        color: #4e3629 !important; /* Color del texto */
+        font-family: 'Cinzel', serif; /* Fuente retro */
+      }
+
+      .pika-button {
+        color: #4e3629 !important; /* Color del texto en botones */
+        font-weight: bold;
+        border-radius: 4px;
+      }
+
+      .pika-button:hover {
+        background-color: #e0d8c6 !important; /* Color en hover para los botones */
+      }
+
+      .pika-title {
+        background-color: #3e3e3e !important; /* Color de fondo del título */
+        color: #f2f2f2 !important; /* Color de texto del título */
+      }
+
+      .pika-prev, .pika-next {
+        color: #f2f2f2 !important; /* Color de flechas prev y next */
+      }
+
+      .pika-lendar th {
+        color: #3e3e3e !important; /* Color de los días de la semana */
       }
 
     </style>
@@ -112,7 +144,7 @@
         <input
           type="text"
           id="datepicker"
-          class="form-input w-full h-12 rounded-xl p-4 mb-4"
+          class="form-input"
           placeholder="Selecciona una fecha"
         />
       </div>
@@ -129,17 +161,17 @@
           type="text"
           id="nombre"
           placeholder="Nombre y apellido"
-          class="form-input w-full h-12 mb-4"
+          class="form-input"
         />
         <input
           type="text"
           id="telefono"
           placeholder="Teléfono"
-          class="form-input w-full h-12 mb-4"
+          class="form-input"
         />
         <button
           id="confirmBtn"
-          class="vintage-button w-full h-12"
+          class="vintage-button"
         >
           Confirmar reserva
         </button>
@@ -153,16 +185,28 @@
     <!-- Script para Pikaday, selección de hora y llamada al backend -->
     <script>
       let selectedTime = ""; // Variable para almacenar la hora seleccionada
-      let selectedDate = ""; // Variable para almacenar la fecha seleccionada
+      let selectedDate = ""; // Variable para almacenar la fecha seleccionada en YYYY-MM-DD
 
       document.addEventListener("DOMContentLoaded", function () {
         // Inicializar el calendario Pikaday
         var picker = new Pikaday({
           field: document.getElementById("datepicker"),
-          format: "YYYY-MM-DD",
+          format: "DD/MM/YYYY", // Mostrar la fecha como dd/mm/aaaa en el input
+          firstDay: 1,
+          i18n: {
+            previousMonth: 'Mes anterior',
+            nextMonth: 'Mes siguiente',
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+          },
           onSelect: function () {
-            selectedDate = picker.toString(); // Usamos toString para obtener la fecha seleccionada
-            console.log("Selected date: " + selectedDate);
+            // Obtener la fecha en formato YYYY-MM-DD para el backend
+            selectedDate = moment(picker.getDate()).format("YYYY-MM-DD");
+            const formattedDateForInput = moment(picker.getDate()).format("DD/MM/YYYY"); // Formato dd/mm/aaaa para mostrar en el input
+            document.getElementById("datepicker").value = formattedDateForInput; // Actualizar el input con el formato dd/mm/aaaa
+
+            console.log("Fecha seleccionada para el backend: " + selectedDate);
 
             // Llamada al backend para obtener las citas disponibles
             fetch(`/available_hours?date=${selectedDate}`)
@@ -179,11 +223,11 @@
                 if (data && data.available_hours.length > 0) {
                   data.available_hours.forEach((hora) => {
                     const citaButton = document.createElement("button");
-                    citaButton.className = "vintage-button w-full h-12"; // Usar el estilo vintage-button
+                    citaButton.className = "vintage-button"; // Usar el estilo vintage-button
                     citaButton.innerText = hora;
                     citaButton.onclick = function () {
                       selectedTime = hora; // Almacenar la hora seleccionada
-                      console.log("Selected time: " + selectedTime);
+                      console.log("Hora seleccionada: " + selectedTime);
 
                       // Desmarcar todos los botones y marcar solo el seleccionado
                       document.querySelectorAll('#citas button').forEach(btn => {
@@ -198,7 +242,7 @@
                 }
               })
               .catch((error) => {
-                console.error("Error fetching available hours:", error);
+                console.error("Error al obtener las horas disponibles:", error);
               });
           },
         });
@@ -217,7 +261,7 @@
           const citaData = {
             usuario: nombre,
             telefono: telefono,
-            fecha: selectedDate,
+            fecha: selectedDate, // Enviar fecha en formato YYYY-MM-DD
             hora: selectedTime
           };
 
@@ -231,7 +275,7 @@
           })
             .then((response) => {
               if (!response.ok) {
-                throw new Error("Server error: " + response.status);
+                throw new Error("Error del servidor: " + response.status);
               }
               return response.json();
             })
