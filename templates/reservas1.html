@@ -173,28 +173,6 @@
         <!-- Aquí se cargarán los botones de las horas disponibles -->
       </section>
 
-      <!-- Datos del usuario -->
-      <div class="p-4">
-        <input
-          type="text"
-          id="nombre"
-          placeholder="Nombre y apellido"
-          class="form-input"
-        />
-        <input
-          type="text"
-          id="telefono"
-          placeholder="Teléfono"
-          class="form-input"
-        />
-        <button
-          id="confirmBtn"
-          class="modern-button"
-        >
-          Confirmar reserva
-        </button>
-      </div>
-
       <footer class="footer">
         <!-- Imagen en la parte baja de la página -->
         <div class="image-container">
@@ -249,11 +227,65 @@
                       selectedTime = hora; // Almacenar la hora seleccionada
                       console.log("Selected time: " + selectedTime);
 
-                      // Desmarcar todos los botones y marcar solo el seleccionado
-                      document.querySelectorAll('#citas button').forEach(btn => {
-                        btn.classList.remove('active-btn');
+                      // Solicitar nombre y teléfono al usuario
+                      const nombre = window.prompt("Introduce tu nombre y apellido:");
+                      const telefono = window.prompt("Introduce tu número de teléfono:");
+
+                      // Validar que el teléfono tenga 9 dígitos
+                      const telefonoValido = /^[0-9]{9}$/;
+                      if (!nombre || !telefono) {
+                        alert("Por favor, completa ambos campos.");
+                        return;
+                      }
+
+                      if (!telefonoValido.test(telefono)) {
+                        alert("El número de teléfono debe contener 9 dígitos.");
+                        return;
+                      }
+
+                      // Formatear el teléfono con el prefijo +34
+                      const telefonoFormatted = "+34" + telefono;
+
+                      // Crear el objeto JSON con los datos de la cita
+                      const citaData = {
+                        usuario: nombre,
+                        telefono: telefonoFormatted,
+                        fecha: selectedDate,
+                        hora: selectedTime
+                      };
+
+                      // Llamar a la API para agregar la cita
+                      fetch('/add_cita', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(citaData) // Enviar los datos de la cita
+                      })
+                      .then((response) => {
+                        if (!response.ok) {
+                          throw new Error("Error del servidor: " + response.status);
+                        }
+                        return response.json();
+                      })
+                      .then((data) => {
+                        alert("Cita confirmada con éxito");
+
+                        // Crear el mensaje de WhatsApp para confirmar la cita
+                        const formattedDate = moment(selectedDate, "YYYY-MM-DD").format("DD/MM/YYYY");
+                        const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${selectedTime}. ¡Te esperamos en la Barbería!`;
+                        const whatsappURL = `https://wa.me/${telefonoFormatted}?text=${encodeURIComponent(mensaje)}`;
+
+                        // Abrir WhatsApp con el mensaje
+                        window.open(whatsappURL, '_blank');
+
+                        // Redirigir al inicio o hacer lo que sea necesario tras la confirmación
+                        window.location.href = '/modelo1';
+                      })
+                      .catch((error) => {
+                        console.error("Error al crear la cita:", error);
+                        alert("Hubo un error al crear la cita.");
                       });
-                      citaButton.classList.add('active-btn'); // Marcar el botón seleccionado
                     };
                     citasDiv.appendChild(citaButton);
                   });
@@ -267,71 +299,6 @@
           },
         });
 
-        // Función que se ejecuta al confirmar la cita
-        document.getElementById("confirmBtn").addEventListener("click", function () {
-          const nombre = document.getElementById("nombre").value;
-          let telefono = document.getElementById("telefono").value;
-
-          // Validación del teléfono: debe tener 9 dígitos
-          const telefonoValido = /^[0-9]{9}$/;
-
-          if (!nombre || !telefono || !selectedDate || !selectedTime) {
-            alert("Por favor, completa todos los campos y selecciona una hora.");
-            return;
-          }
-
-          if (!telefonoValido.test(telefono)) {
-            alert("El número de teléfono debe contener 9 dígitos.");
-            return;
-          }
-
-          // Agregar el prefijo +34 al teléfono
-          telefono = "+34" + telefono;
-
-          // Crear el objeto JSON con los datos de la cita
-          const citaData = {
-            usuario: nombre,
-            telefono: telefono,
-            fecha: selectedDate,
-            hora: selectedTime
-          };
-
-          // Hacer la llamada al backend para crear la cita
-          fetch('/add_cita', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(citaData) // Enviar los datos de la cita
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error del servidor: " + response.status);
-              }
-              return response.json();
-            })
-            .then((data) => {
-              alert("Cita confirmada con éxito");
-              console.log("Respuesta del servidor:", data);
-
-              // Formatear la fecha a DD/MM/YYYY usando Moment.js
-              const formattedDate = moment(selectedDate, "YYYY-MM-DD").format("DD/MM/YYYY");
-
-              // Crear el mensaje de WhatsApp
-              const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${selectedTime}. ¡Te esperamos en la Barbería!`;
-              const whatsappURL = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-
-              // Abrir WhatsApp con el mensaje
-              window.open(whatsappURL, '_blank');
-
-              // Redirigir al index después de confirmar la cita
-              window.location.href = '/modelo1'; // Aquí puedes poner la URL de tu página de inicio
-            })
-            .catch((error) => {
-              console.error("Error al crear la cita:", error);
-              alert("Hubo un error al crear la cita.");
-            });
-        });
       });
     </script>
   </body>
