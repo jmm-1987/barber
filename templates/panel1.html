@@ -137,7 +137,7 @@
       }
 
       /* Marcar el domingo en rojo */
-      .pika-table th:nth-child(7) {
+      .pika-table th:nth-child(1) {
         color: red;
       }
     </style>
@@ -181,10 +181,10 @@
           },
           firstDay: 1, // La semana empieza en lunes
           onSelect: function () {
-            const selectedDate = moment(picker.getMoment()).format("YYYY/MM/DD"); // Formato aaaa/mm/dd para el backend
+            const selectedDate = picker.getMoment().format("YYYY-MM-DD"); // Enviar en formato aaaa-mm-dd para que coincida con el código original
             console.log("Fecha seleccionada para el backend: " + selectedDate);
 
-            // Solicitar citas ocupadas y horas disponibles usando el formato aaaa/mm/dd
+            // Hacer ambas solicitudes: una para las citas ocupadas y otra para las horas disponibles
             Promise.all([
               fetch(`/unavailable_hours?date=${selectedDate}`).then(response => response.json()),
               fetch(`/available_hours?date=${selectedDate}`).then(response => response.json())
@@ -252,7 +252,7 @@
                   const citaData = {
                     usuario: nombre,
                     telefono: telefonoFormatted,
-                    fecha: selectedDate, // Enviar fecha en formato aaaa/mm/dd
+                    fecha: selectedDate, // Formato para el backend
                     hora: hora
                   };
 
@@ -271,7 +271,7 @@
                   })
                   .then((data) => {
                     alert("Cita confirmada con éxito");
-                    const formattedDate = moment(selectedDate, "YYYY/MM/DD").format("DD/MM/YYYY");
+                    const formattedDate = moment(selectedDate, "YYYY-MM-DD").format("DD/MM/YYYY");
                     const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${hora}. ¡Te esperamos en la Barbería!`;
                     const whatsappURL = `https://wa.me/${telefonoFormatted}?text=${encodeURIComponent(mensaje)}`;
 
