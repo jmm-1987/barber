@@ -26,8 +26,8 @@
       }
 
       body {
-        background-color: #ffffff; /* Fondo blanco */
-        color: #000000; /* Texto en negro */
+        background-color: #ffffff;
+        color: #000000;
         display: flex;
         flex-direction: column;
         min-height: 100vh;
@@ -45,16 +45,16 @@
       .header h1 {
         font-size: 40px;
         font-weight: bold;
-        color: #000000; /* Texto en negro */
+        color: #000000;
         margin-bottom: 30px;
         letter-spacing: 2px;
         text-transform: uppercase;
       }
 
       .form-input {
-        background-color: #f5f5f5; /* Fondo blanco para los campos */
+        background-color: #f5f5f5;
         color: #000000;
-        border: 2px solid #000000; /* Borde negro */
+        border: 2px solid #000000;
         border-radius: 8px;
         padding: 10px;
         width: 100%;
@@ -89,11 +89,11 @@
       }
 
       .cita-reservada {
-        background-color: #b0b0b0; /* Fondo gris para ocupadas */
+        background-color: #b0b0b0;
       }
 
       .cita-libre {
-        background-color: #ffffff; /* Fondo blanco para libres */
+        background-color: #ffffff;
       }
 
       .cita-element strong {
@@ -109,7 +109,7 @@
         height: 30px;
         background: repeating-linear-gradient(
           45deg,
-          #d62828, /* Rojo típico de barbería */
+          #d62828,
           #d62828 10px,
           #fefae0 10px,
           #fefae0 20px,
@@ -136,6 +136,10 @@
         margin-top: 10px;
       }
 
+      /* Marcar el domingo en rojo */
+      .pika-table th:nth-child(1) {
+        color: red;
+      }
     </style>
   </head>
   <body>
@@ -164,177 +168,175 @@
     </div>
 
     <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var picker = new Pikaday({
-      field: document.getElementById("datepicker"),
-      format: "YYYY-MM-DD",
-      onSelect: function () {
-        const selectedDate = picker.toString(); // Fecha seleccionada en formato YYYY-MM-DD
-        console.log("Fecha seleccionada: " + selectedDate);
+      document.addEventListener("DOMContentLoaded", function () {
+        var picker = new Pikaday({
+          field: document.getElementById("datepicker"),
+          format: "DD/MM/YYYY", // Formato de fecha dd/mm/aaaa
+          i18n: {
+            previousMonth: 'Mes anterior',
+            nextMonth: 'Mes siguiente',
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+          },
+          firstDay: 1, // La semana empieza en lunes
+          onSelect: function () {
+            const selectedDate = picker.toString(); // Fecha seleccionada en formato DD/MM/YYYY
+            console.log("Fecha seleccionada: " + selectedDate);
 
-        // Hacer ambas solicitudes: una para las citas ocupadas y otra para las horas disponibles
-        Promise.all([
-          fetch(`/unavailable_hours?date=${selectedDate}`).then(response => response.json()),
-          fetch(`/available_hours?date=${selectedDate}`).then(response => response.json())
-        ])
-        .then(([ocupadasData, disponiblesData]) => {
-          const citasDiv = document.getElementById("citas");
-          citasDiv.innerHTML = "";
+            // Solicitar citas ocupadas y horas disponibles
+            Promise.all([
+              fetch(`/unavailable_hours?date=${selectedDate}`).then(response => response.json()),
+              fetch(`/available_hours?date=${selectedDate}`).then(response => response.json())
+            ])
+            .then(([ocupadasData, disponiblesData]) => {
+              const citasDiv = document.getElementById("citas");
+              citasDiv.innerHTML = "";
 
-          let citasOcupadas = ocupadasData.unavailable_hours || [];
-          let horasDisponibles = disponiblesData.available_hours || [];
+              let citasOcupadas = ocupadasData.unavailable_hours || [];
+              let horasDisponibles = disponiblesData.available_hours || [];
 
-          // Mostrar todas las citas ocupadas
-          citasOcupadas.forEach((cita) => {
-            const citaElement = document.createElement("div");
-            citaElement.className = "cita-element cita-reservada"; // Fondo gris para ocupadas
-            citaElement.innerHTML = `
-              <p><strong>ID:</strong> ${cita.id}</p>
-              <p><strong>Nombre:</strong> ${cita.usuario}</p>
-              <p><strong>Teléfono:</strong> ${cita.telefono}</p>
-              <p><strong>Fecha:</strong> ${cita.fecha}</p>
-              <p><strong>Hora:</strong> ${cita.hora}</p>
-              <div class="button-container">
-                <button class="modern-button cancelarCitaBtn" data-id="${cita.id}">Cancelar</button>
-                <a href="tel:${cita.telefono}" class="flex-button">
-                  <i class="fas fa-phone"></i>
-                </a>
-                <a href="https://wa.me/${cita.telefono}" class="flex-button">
-                  <i class="fab fa-whatsapp"></i>
-                </a>
-              </div>
-            `;
-            citasDiv.appendChild(citaElement);
-          });
-
-          // Mostrar todas las horas libres
-          horasDisponibles.forEach((hora) => {
-            const citaLibreElement = document.createElement("div");
-            citaLibreElement.className = "cita-element cita-libre"; // Fondo blanco para libres
-            citaLibreElement.innerHTML = `
-              <p><strong>Hora:</strong> ${hora}</p>
-              <p><strong>Nombre:</strong> Libre</p>
-            `;
-            // Añadir un evento onclick para cuando se selecciona una hora libre
-            citaLibreElement.addEventListener("click", function () {
-              // Solicitar nombre y teléfono al usuario mediante prompt
-              const nombre = window.prompt("Introduce tu nombre y apellido:");
-              if (!nombre) {
-                alert("El nombre no puede estar vacío");
-                return; // Salir si no se introduce un nombre
-              }
-
-              const telefono = window.prompt("Introduce tu número de teléfono:");
-              const telefonoValido = /^[0-9]{9}$/;
-
-              if (!telefono) {
-                alert("El teléfono no puede estar vacío");
-                return; // Salir si no se introduce un teléfono
-              }
-
-              if (!telefonoValido.test(telefono)) {
-                alert("El número de teléfono debe contener 9 dígitos.");
-                return; // Salir si el teléfono no tiene el formato correcto
-              }
-
-              // Formatear el teléfono con el prefijo +34
-              const telefonoFormatted = "+34" + telefono;
-
-              // Crear el objeto JSON con los datos de la cita
-              const citaData = {
-                usuario: nombre,
-                telefono: telefonoFormatted,
-                fecha: selectedDate,
-                hora: hora // Hora seleccionada
-              };
-
-              // Llamar a la API para agregar la cita
-              fetch('/add_cita', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(citaData) // Enviar los datos de la cita
-              })
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Error del servidor: " + response.status);
-                }
-                return response.json();
-              })
-              .then((data) => {
-                alert("Cita confirmada con éxito");
-
-                // Crear el mensaje de WhatsApp para confirmar la cita
-                const formattedDate = moment(selectedDate, "YYYY-MM-DD").format("DD/MM/YYYY");
-                const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${hora}. ¡Te esperamos en la Barbería!`;
-                const whatsappURL = `https://wa.me/${telefonoFormatted}?text=${encodeURIComponent(mensaje)}`;
-
-                // Abrir WhatsApp con el mensaje
-                window.open(whatsappURL, '_blank');
-
-                // Redirigir al inicio o hacer lo que sea necesario tras la confirmación
-                window.location.href = '/modelo1';
-              })
-              .catch((error) => {
-                console.error("Error al crear la cita:", error);
-                alert("Hubo un error al crear la cita.");
+              // Mostrar todas las citas ocupadas
+              citasOcupadas.forEach((cita) => {
+                const citaElement = document.createElement("div");
+                citaElement.className = "cita-element cita-reservada";
+                citaElement.innerHTML = `
+                  <p><strong>ID:</strong> ${cita.id}</p>
+                  <p><strong>Nombre:</strong> ${cita.usuario}</p>
+                  <p><strong>Teléfono:</strong> ${cita.telefono}</p>
+                  <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                  <p><strong>Hora:</strong> ${cita.hora}</p>
+                  <div class="button-container">
+                    <button class="modern-button cancelarCitaBtn" data-id="${cita.id}">Cancelar</button>
+                    <a href="tel:${cita.telefono}" class="flex-button">
+                      <i class="fas fa-phone"></i>
+                    </a>
+                    <a href="https://wa.me/${cita.telefono}" class="flex-button">
+                      <i class="fab fa-whatsapp"></i>
+                    </a>
+                  </div>
+                `;
+                citasDiv.appendChild(citaElement);
               });
-            });
-            citasDiv.appendChild(citaLibreElement);
-          });
 
-          // Asignar eventos de cancelación a las citas ocupadas
-          asignarEventosCancelar();
+              // Mostrar todas las horas libres
+              horasDisponibles.forEach((hora) => {
+                const citaLibreElement = document.createElement("div");
+                citaLibreElement.className = "cita-element cita-libre";
+                citaLibreElement.innerHTML = `
+                  <p><strong>Hora:</strong> ${hora}</p>
+                  <p><strong>Nombre:</strong> Libre</p>
+                `;
+                citaLibreElement.addEventListener("click", function () {
+                  const nombre = window.prompt("Introduce tu nombre y apellido:");
+                  if (!nombre) {
+                    alert("El nombre no puede estar vacío");
+                    return;
+                  }
+
+                  const telefono = window.prompt("Introduce tu número de teléfono:");
+                  const telefonoValido = /^[0-9]{9}$/;
+
+                  if (!telefono) {
+                    alert("El teléfono no puede estar vacío");
+                    return;
+                  }
+
+                  if (!telefonoValido.test(telefono)) {
+                    alert("El número de teléfono debe contener 9 dígitos.");
+                    return;
+                  }
+
+                  const telefonoFormatted = "+34" + telefono;
+
+                  const citaData = {
+                    usuario: nombre,
+                    telefono: telefonoFormatted,
+                    fecha: selectedDate,
+                    hora: hora
+                  };
+
+                  fetch('/add_cita', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(citaData)
+                  })
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error del servidor: " + response.status);
+                    }
+                    return response.json();
+                  })
+                  .then((data) => {
+                    alert("Cita confirmada con éxito");
+                    const formattedDate = moment(selectedDate, "YYYY-MM-DD").format("DD/MM/YYYY");
+                    const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${hora}. ¡Te esperamos en la Barbería!`;
+                    const whatsappURL = `https://wa.me/${telefonoFormatted}?text=${encodeURIComponent(mensaje)}`;
+
+                    // Abrir WhatsApp con el mensaje
+                    window.open(whatsappURL, '_blank');
+
+                    // Redirigir al inicio o realizar alguna otra acción tras la confirmación
+                    window.location.href = '/modelo1';
+                  })
+                  .catch((error) => {
+                    console.error("Error al crear la cita:", error);
+                    alert("Hubo un error al crear la cita.");
+                  });
+                });
+                citasDiv.appendChild(citaLibreElement);
+              });
+
+              // Asignar eventos de cancelación a las citas ocupadas
+              asignarEventosCancelar();
+            })
+            .catch((error) => {
+              console.error("Error al obtener los datos:", error);
+            });
+          }
+        });
+      });
+
+      // Función para cancelar la cita
+      function delete_cita(id) {
+        const confirmacion = confirm(`¿Estás seguro de que quieres cancelar esta cita?`);
+        if (!confirmacion) return;
+
+        fetch('/delete_cita', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: id }),
+        })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error del servidor: " + response.status);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          alert("Cita cancelada exitosamente");
+          location.reload();
         })
         .catch((error) => {
-          console.error("Error al obtener los datos:", error);
+          console.error("Error al cancelar la cita:", error);
+          alert("Hubo un error al cancelar la cita.");
         });
-      },
-    });
-  });
-
-  // Función para cancelar la cita
-  function delete_cita(id) {
-    const confirmacion = confirm(`¿Estás seguro de que quieres cancelar esta cita?`);
-    if (!confirmacion) return;
-
-    fetch('/delete_cita', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: id }),
-    })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Error del servidor: " + response.status);
       }
-      return response.json();
-    })
-    .then((data) => {
-      alert("Cita cancelada exitosamente");
-      location.reload();
-    })
-    .catch((error) => {
-      console.error("Error al cancelar la cita:", error);
-      alert("Hubo un error al cancelar la cita.");
-    });
-  }
 
-  // Función para asignar los eventos de cancelación a los botones de cancelar
-  function asignarEventosCancelar() {
-    const botonesCancelar = document.querySelectorAll('.cancelarCitaBtn');
-    botonesCancelar.forEach(boton => {
-      boton.addEventListener('click', function () {
-        const citaId = this.getAttribute('data-id');
-        delete_cita(citaId);
-      });
-    });
-  }
-</script>
+      // Función para asignar los eventos de cancelación a los botones de cancelar
+      function asignarEventosCancelar() {
+        const botonesCancelar = document.querySelectorAll('.cancelarCitaBtn');
+        botonesCancelar.forEach(boton => {
+          boton.addEventListener('click', function () {
+            const citaId = this.getAttribute('data-id');
+            delete_cita(citaId);
+          });
+        });
+      }
+    </script>
   </body>
-                
-            
-          
 </html>
