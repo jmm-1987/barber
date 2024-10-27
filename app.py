@@ -31,6 +31,11 @@ def modelo2():
 def modelo3():
     return render_template('index3.html')
 
+@app.route('/modelo4')
+def modelo4():
+    return render_template('index4.html')
+
+
 @app.route('/reservas1')
 def mostrar_reservas1():
     return render_template('reservas1.html')
