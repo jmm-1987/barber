@@ -12,7 +12,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barber Shop Modern</title>
+    <title>Peluquería Glamour</title>
 
     <!-- Incluir fuente vintage desde Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
@@ -53,7 +53,7 @@
             font-family: 'Cinzel', serif;
             font-size: 48px;
             font-weight: bold;
-            color: #000000;
+            color: #d4af37; /* Color dorado */
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-top: 10px;
@@ -66,11 +66,6 @@
         @keyframes typing {
             from { width: 0; }
             to { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: black; }
         }
 
         .logo img {
@@ -91,8 +86,8 @@
         .modern-button {
             font-family: 'Cinzel', serif;
             background-color: #000000;
-            color: #ffffff;
-            border: 2px solid #000000;
+            color: #d4af37; /* Color dorado */
+            border: 2px solid #d4af37; /* Color dorado */
             padding: 15px 40px;
             font-size: 16px;
             font-weight: bold;
@@ -110,93 +105,9 @@
         }
 
         .modern-button:hover {
-            background-color: #ffffff;
+            background-color: #d4af37; /* Color dorado */
             color: #000000;
-            border: 2px solid #000000;
-        }
-
-        .footer {
-            position: relative;
-            width: 100%;
-        }
-
-        .stripe-bar {
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #000000 50%, #ffffff 50%);
-            margin-top: 40px;
-        }
-
-        .image-container {
-            width: 100%;
-            text-align: center;
-            position: relative;
-            margin-top: 20px;
-        }
-
-        .image-container img {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        /* Estilos para pantallas grandes */
-        @media (min-width: 768px) {
-            .modern-button {
-                width: auto;
-            }
-
-            .header h1 {
-                font-size: 56px;
-                margin-top: 20px;
-            }
-
-            .logo img {
-                width: 150px;
-            }
-
-            .image-container img {
-                max-width: 800px;
-            }
-
-            .container {
-                padding: 40px;
-            }
-        }
-
-        /* Estilos para pantallas pequeñas */
-        @media (max-width: 767px) {
-            .header h1 {
-                font-size: 36px;
-            }
-
-            .modern-button {
-                padding: 10px 20px;
-            }
-
-            .logo img {
-                width: 200px;
-            }
-
-            .image-container img {
-                max-width: 400px;
-            }
-
-            .container {
-                padding: 10px;
-            }
-        }
-
-        /* Centrar el texto de selección */
-        .select-hour-text {
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #000000;
+            border: 2px solid #d4af37;
         }
 
         /* Botón de WhatsApp flotante */
@@ -225,38 +136,71 @@
             height: 35px;
         }
 
+        /* Estilos para pantallas grandes */
+        @media (min-width: 768px) {
+            .modern-button {
+                width: auto;
+            }
+
+            .header h1 {
+                font-size: 56px;
+                margin-top: 20px;
+            }
+
+            .logo img {
+                width: 150px;
+            }
+
+            .container {
+                padding: 40px;
+            }
+        }
+
+        /* Estilos para pantallas pequeñas */
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .modern-button {
+                padding: 10px 20px;
+            }
+
+            .logo img {
+                width: 200px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <h1 id="typed-title">Barber Shop</h1>
+            <h1 id="typed-title">Peluquería Glamour</h1>
         </header>
 
         <div class="logo">
-            <img src="static/logo1.png" alt="Barber Logo">
+            <img src="static/logo1.png" alt="Peluquería Logo">
         </div>
 
         <section class="buttons">
             <a href="/reservas1">
-            <button class="modern-button">Reservar Cita</button>
+                <button class="modern-button">Reservar Cita</button>
             </a>
             <a href="/carta1">
-            <button class="modern-button">Servicios</button>
+                <button class="modern-button">Servicios</button>
             </a>
             <a href="/galeria1">
-            <button class="modern-button">Trabajos</button>
+                <button class="modern-button">Trabajos</button>
             </a>
             <a href="/panel1">
-            <button class="modern-button">Administración</button>
+                <button class="modern-button">Administración</button>
             </a>
         </section>
-
-        <footer class="footer">
-            <div class="image-container">
-                <img src="static/footer.PNG" alt="footer">
-            </div>
-        </footer>
     </div>
 
     <!-- Botón de WhatsApp flotante -->
