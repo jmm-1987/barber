@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZND42296P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9ZND42296P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Shop Modern</title>
+
+    <!-- Incluir fuente vintage desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        /* Estilo del título con efecto escritura */
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 48px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0; /* Inicialmente el ancho es 0 */
+            animation: typing 3s steps(30) forwards;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: black; }
+        }
+
+        .logo img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 40px;
+            filter: grayscale(100%);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .modern-button {
+            font-family: 'Cinzel', serif;
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #000000;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            flex-grow: 1;
+            max-width: 200px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .modern-button:hover {
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        .footer {
+            position: relative;
+            width: 100%;
+        }
+
+        .stripe-bar {
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #000000 50%, #ffffff 50%);
+            margin-top: 40px;
+        }
+
+        .image-container {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Estilos para pantallas grandes */
+        @media (min-width: 768px) {
+            .modern-button {
+                width: auto;
+            }
+
+            .header h1 {
+                font-size: 56px;
+                margin-top: 20px;
+            }
+
+            .logo img {
+                width: 150px;
+            }
+
+            .image-container img {
+                max-width: 800px;
+            }
+
+            .container {
+                padding: 40px;
+            }
+        }
+
+        /* Estilos para pantallas pequeñas */
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .modern-button {
+                padding: 10px 20px;
+            }
+
+            .logo img {
+                width: 200px;
+            }
+
+            .image-container img {
+                max-width: 400px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        /* Centrar el texto de selección */
+        .select-hour-text {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        /* Botón de WhatsApp flotante */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #20b858;
+        }
+
+        .whatsapp-button img {
+            width: 35px;
+            height: 35px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 id="typed-title">Barber Shop</h1>
+        </header>
+
+        <div class="logo">
+            <img src="static/logo1.png" alt="Barber Logo">
+        </div>
+
+        <section class="buttons">
+            <a href="/reservas1">
+            <button class="modern-button">Reservar Cita</button>
+            </a>
+            <a href="/carta1">
+            <button class="modern-button">Servicios</button>
+            </a>
+            <a href="/galeria1">
+            <button class="modern-button">Trabajos</button>
+            </a>
+            <a href="/panel1">
+            <button class="modern-button">Administración</button>
+            </a>
+        </section>
+
+        <footer class="footer">
+            <div class="image-container">
+                <img src="static/footer.PNG" alt="footer">
+            </div>
+        </footer>
+    </div>
+
+    <!-- Botón de WhatsApp flotante -->
+    <a href="https://wa.me/34625433667" class="whatsapp-button" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
+    </a>
+</body>
+</html>
