@@ -14,8 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peluquería Glamour</title>
 
-    <!-- Fuente de estilo más femenino y elegante -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Fuente elegante y sofisticada -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
@@ -23,15 +23,15 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Raleway', sans-serif; /* Fuente moderna y ligera */
+            font-family: 'Raleway', sans-serif;
         }
 
         body {
-            background: url('static/fondo_peluqueria_femenina.png') no-repeat center center fixed; /* Imagen de fondo más femenina */
-            background-size: cover;
+            background-color: #111; /* Fondo negro elegante */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            color: #FFD700; /* Color dorado */
         }
 
         .container {
@@ -47,42 +47,43 @@
 
         .header h1 {
             font-size: 48px;
-            color: #A055A3; /* Color elegante y femenino */
-            font-family: 'Great Vibes', cursive; /* Nueva fuente cursiva */
+            color: #FFD700; /* Dorado para el título */
+            font-family: 'Playfair Display', serif; /* Fuente elegante */
             margin-bottom: 20px;
-            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5); /* Sombra elegante */
         }
 
         .logo img {
             width: 180px;
             height: auto;
             margin: 20px 0;
+            filter: brightness(0) invert(1); /* Efecto para adaptarse al fondo oscuro */
         }
 
         .buttons {
-            margin-bottom: 40px; /* Espacio adicional para pegarlo más abajo */
+            margin-bottom: 40px;
         }
 
         .vintage-button {
-            background-color: #A055A3; /* Color púrpura más suave */
-            color: #FFFFFF; /* Color blanco para el texto */
-            border: none;
+            background-color: #333; /* Botón oscuro */
+            color: #FFD700; /* Texto dorado */
+            border: 2px solid #FFD700; /* Borde dorado */
             padding: 15px 30px;
             margin: 10px;
             font-size: 16px;
-            border-radius: 20px; /* Bordes más redondeados */
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra elegante */
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .vintage-button:hover {
-            background-color: #B76DA3; /* Color más claro en hover */
-            transform: translateY(-2px); /* Pequeño efecto de elevación */
+            background-color: #555; /* Color más claro en hover */
+            transform: translateY(-2px);
         }
 
         a {
-            text-decoration: none; /* Elimina el subrayado en los enlaces */
+            text-decoration: none;
         }
 
         /* Botón de WhatsApp flotante */
@@ -92,9 +93,9 @@
             right: 20px;
             width: 60px;
             height: 60px;
-            background-color: #E84393; /* Color rosa suave para WhatsApp */
+            background-color: #25D366;
             border-radius: 50%;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -103,7 +104,7 @@
         }
 
         .whatsapp-button:hover {
-            background-color: #D23C87;
+            background-color: #1DA955;
         }
 
         .whatsapp-button img {
