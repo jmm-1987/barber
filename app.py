@@ -39,6 +39,10 @@ def modelo4():
 def modelo5():
     return render_template('index5.html')
 
+@app.route('/modelo6')
+def modelo6():
+    return render_template('index6.html')
+
 
 @app.route('/reservas1')
 def mostrar_reservas1():
