@@ -51,6 +51,10 @@ def modelo7():
 def modelo8():
     return render_template('index8.html')
 
+@app.route('/modelo9')
+def modelo9():
+    return render_template('index9.html')
+
 
 @app.route('/reservas1')
 def mostrar_reservas1():
