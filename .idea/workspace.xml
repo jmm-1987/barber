@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16b52d5e-899e-4204-8668-7bbfdf15b2b1" name="Changes" comment="presentacion">
-      <change afterPath="$PROJECT_DIR$/templates/confirm1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/index7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/peluquero.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/peluquero.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/peluqueria.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/peluqueria.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/reservas1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/reservas1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,15 +50,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "Gestión-panel",
-    "last_opened_file_path": "C:/Users/JonyPc/PycharmProjects/barber/templates",
+    "last_opened_file_path": "C:/Users/jmm87/PycharmProjects/barber/templates",
     "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\JonyPc\PycharmProjects\barber\templates" />
       <recent name="C:\Users\jmm87\PycharmProjects\barber\templates" />
+      <recent name="C:\Users\JonyPc\PycharmProjects\barber\templates" />
     </key>
   </component>
   <component name="RunManager">
@@ -87,7 +88,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-09665e90c3a7-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.15026.15" />
+        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
       </set>
     </attachedChunks>
   </component>
