@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZND42296P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9ZND42296P');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peluquería Glamour - Reservas</title>
+
+    <!-- Fuentes para el estilo femenino y elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Moment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <!-- Pikaday JS -->
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <!-- Pikaday CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', sans-serif; /* Fuente moderna y ligera */
+        }
+
+        body {
+            background: url('static/fondo_peluqueria_femenina.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            color: #A055A3;
+            font-family: 'Great Vibes', cursive;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo img {
+            width: 180px;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        .form-input {
+            background-color: #f5f5f5;
+            color: #000000;
+            border: 2px solid #A055A3;
+            border-radius: 8px;
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        .vintage-button {
+            background-color: #A055A3;
+            color: #FFFFFF;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .vintage-button:hover {
+            background-color: #B76DA3;
+            transform: translateY(-2px);
+        }
+
+        .buttons-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+        }
+
+        .select-hour-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #A055A3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Peluquería Glamour</h1>
+        </header>
+
+        <div class="logo">
+            <img src="static/logo41.png" alt="Logo Peluquería Glamour">
+        </div>
+
+        <!-- Calendario interactivo -->
+        <div class="form-input-container">
+            <input type="text" id="datepicker" class="form-input" placeholder="Selecciona una fecha" />
+        </div>
+
+        <!-- Citas dinámicas -->
+        <div class="select-hour-text">
+            <h2>Selecciona la hora</h2>
+        </div>
+
+        <section class="buttons-container" id="citas">
+            <!-- Aquí se cargarán los botones de las horas disponibles -->
+        </section>
+    </div>
+
+    <!-- Script para Pikaday, selección de hora y llamada al backend -->
+    <script>
+        let selectedTime = "";
+        let selectedDate = "";
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var picker = new Pikaday({
+                field: document.getElementById("datepicker"),
+                format: "DD/MM/YYYY",
+                firstDay: 1,
+                i18n: {
+                    previousMonth: 'Mes anterior',
+                    nextMonth: 'Mes siguiente',
+                    months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                    weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+                },
+                onSelect: function () {
+                    selectedDate = moment(picker.getDate()).format("YYYY-MM-DD");
+                    fetch(`/available_hours?date=${selectedDate}`)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            const citasDiv = document.getElementById("citas");
+                            citasDiv.innerHTML = "";
+
+                            if (data && data.available_hours.length > 0) {
+                                data.available_hours.forEach((hora) => {
+                                    const citaButton = document.createElement("button");
+                                    citaButton.className = "vintage-button";
+                                    citaButton.innerText = hora;
+                                    citaButton.onclick = function () {
+                                        selectedTime = hora;
+
+                                        // Pedir nombre y teléfono usando prompt
+                                        const nombre = window.prompt("Introduce tu nombre y apellido:");
+                                        const telefono = window.prompt("Introduce tu número de teléfono:");
+
+                                        // Validación de nombre y teléfono
+                                        if (!nombre || !/^[0-9]{9}$/.test(telefono)) {
+                                            alert("Por favor, completa ambos campos correctamente.");
+                                            return;
+                                        }
+
+                                        const citaData = {
+                                            usuario: nombre,
+                                            telefono: "+34" + telefono,
+                                            fecha: selectedDate,
+                                            hora: selectedTime
+                                        };
+
+                                        // Enviar la solicitud al backend
+                                        fetch('/add_cita', {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify(citaData)
+                                        })
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                            const nombre = encodeURIComponent(citaData.usuario);
+                                            const telefono = encodeURIComponent(citaData.telefono);
+                                            const fecha = encodeURIComponent(citaData.fecha);
+                                            const hora = encodeURIComponent(citaData.hora);
+                                            window.location.href = `/confirm1?nombre=${nombre}&telefono=${telefono}&fecha=${fecha}&hora=${hora}`;
+                                        })
+                                        .catch((error) => {
+                                            console.error("Error al crear la cita:", error);
+                                            alert("Hubo un error al crear la cita.");
+                                        });
+                                    };
+                                    citasDiv.appendChild(citaButton);
+                                });
+                            } else {
+                                citasDiv.innerText = "No hay horas disponibles";
+                            }
+                        })
+                        .catch((error) => console.error("Error fetching available hours:", error));
+                },
+            });
+        });
+    </script>
+</body>
+</html>
+

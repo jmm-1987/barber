@@ -171,8 +171,6 @@
           onSelect: function () {
             selectedDate = moment(picker.getDate()).format("YYYY-MM-DD");
 
-            console.log("Selected date for backend: " + selectedDate);
-
             // Llamada al backend para obtener las citas disponibles
             fetch(`/available_hours?date=${selectedDate}`)
               .then((response) => {
@@ -251,7 +249,6 @@
             })
             .then((data) => {
               alert("Cita confirmada con éxito");
-              console.log("Respuesta del servidor:", data);
 
               const formattedDate = moment(selectedDate).format("DD/MM/YYYY");
 

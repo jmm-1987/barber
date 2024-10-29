@@ -72,6 +72,10 @@ def mostrar_reservas2():
 def mostrar_reservas3():
     return render_template('reservas3.html')
 
+@app.route('/reservas4')
+def mostrar_reservas4():
+    return render_template('reservas4.html')
+
 @app.route('/galeria1')
 def mostrar_galeria1():
     return render_template('galeria1.html')
