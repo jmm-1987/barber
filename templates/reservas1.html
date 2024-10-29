@@ -224,23 +224,16 @@
                                         })
                                         .then((response) => response.json())
                                         .then((data) => {
-                                            alert("Cita confirmada con éxito");
-
-                                            // Crear mensaje y URL de WhatsApp
-                                            const formattedDate = moment(selectedDate, "YYYY-MM-DD").format("DD/MM/YYYY");
-                                            const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${formattedDate} a las ${selectedTime}. ¡Te esperamos en la Barbería!`;
-                                            const whatsappURL = `https://wa.me/+34${telefono}?text=${encodeURIComponent(mensaje)}`;
-
-                                            // Abrir WhatsApp
-                                            window.open(whatsappURL, '_blank');
-
-                                            // Redirigir a la página de inicio
-                                            window.location.href = '/modelo1';
-                                        })
-                                        .catch((error) => {
-                                            console.error("Error al crear la cita:", error);
-                                            alert("Hubo un error al crear la cita.");
-                                        });
+    const nombre = encodeURIComponent(citaData.usuario);
+    const telefono = encodeURIComponent(citaData.telefono);
+    const fecha = encodeURIComponent(citaData.fecha);
+    const hora = encodeURIComponent(citaData.hora);
+    window.location.href = `/confirm1?nombre=${nombre}&telefono=${telefono}&fecha=${fecha}&hora=${hora}`;
+})
+.catch((error) => {
+    console.error("Error al crear la cita:", error);
+    alert("Hubo un error al crear la cita.");
+});
                                     };
                                     citasDiv.appendChild(citaButton);
                                 });

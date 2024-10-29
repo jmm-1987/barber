@@ -140,7 +140,7 @@
 
         <!-- Caja con los detalles de la cita -->
         <div class="details-box">
-            <h2>Detalles de tu Cita</h2>
+            <h2>Cita confirmada con éxito</h2>
             <p><strong>Nombre:</strong> <span id="nombre"></span></p>
             <p><strong>Teléfono:</strong> <span id="telefono"></span></p>
             <p><strong>Fecha:</strong> <span id="fecha"></span></p>
@@ -150,7 +150,7 @@
         <!-- Botones de acción -->
         <section class="buttons-container">
             <button class="modern-button" id="whatsappButton">Enviar a mi WhatsApp</button>
-            <button class="modern-button" onclick="window.location.href = '/'">Aceptar</button>
+            <button class="modern-button" onclick="window.location.href = '/modelo1'">Aceptar</button>
         </section>
 
         <footer class="footer">
@@ -161,24 +161,37 @@
     </div>
 
     <script>
-        // Simulación de datos para pruebas
-        const nombre = "Nombre de Prueba";
-        const telefono = "+34 600000000";
-        const fecha = "15/11/2024";
-        const hora = "10:00";
+    // Función para obtener los parámetros de la URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
 
-        // Rellenar los detalles en la pantalla
-        document.getElementById("nombre").innerText = nombre;
-        document.getElementById("telefono").innerText = telefono;
-        document.getElementById("fecha").innerText = fecha;
-        document.getElementById("hora").innerText = hora;
+    // Extraer los datos de la URL
+    const nombre = getQueryParam("nombre") || "Nombre de Prueba";
+    const telefono = getQueryParam("telefono") || "+34 600000000";
+    let fecha = getQueryParam("fecha") || "2024-11-15";  // Default en formato yyyy-mm-dd
+    const hora = getQueryParam("hora") || "10:00";
 
-        // Enviar los detalles de la cita a WhatsApp
-        document.getElementById("whatsappButton").onclick = function() {
-            const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${fecha} a las ${hora}. ¡Te esperamos en la Barbería!`;
-            const whatsappURL = `https://wa.me/${telefono.replace(/\s+/g, '')}?text=${encodeURIComponent(mensaje)}`;
-            window.open(whatsappURL, '_blank');
-        };
-    </script>
+    // Convertir fecha al formato dd/mm/aaaa solo para la presentación
+    if (fecha.includes("-")) {
+        const [year, month, day] = fecha.split("-");
+        fecha = `${day}/${month}/${year}`;
+    }
+
+    // Rellenar los detalles en la pantalla
+    document.getElementById("nombre").innerText = nombre;
+    document.getElementById("telefono").innerText = telefono;
+    document.getElementById("fecha").innerText = fecha;
+    document.getElementById("hora").innerText = hora;
+
+    // Enviar los detalles de la cita a WhatsApp
+    document.getElementById("whatsappButton").onclick = function() {
+        const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${fecha} a las ${hora}. ¡Te esperamos en la Barbería!`;
+        const whatsappURL = `https://wa.me/${telefono.replace(/\s+/g, '')}?text=${encodeURIComponent(mensaje)}`;
+        window.open(whatsappURL, '_blank');
+    };
+</script>
+
 </body>
 </html>
