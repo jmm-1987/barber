@@ -109,10 +109,12 @@
         padding: 15px;
         margin-bottom: 10px;
         cursor: pointer;
+        width: 100%;
       }
 
       .cita-reservada {
         background-color: #b0b0b0;
+
       }
 
       .cita-libre {
@@ -157,6 +159,7 @@
         display: flex;
         justify-content: space-between;
         margin-top: 10px;
+        align-items: center;
       }
 
       /* Marcar el domingo en rojo */
@@ -235,10 +238,10 @@
                   <p><strong>ID:</strong> ${cita.id}</p>
                   <div class="button-container">
                     <button class="modern-button cancelarCitaBtn" data-id="${cita.id}">Cancelar</button>
-                    <a href="tel:${cita.telefono}" class="modern-button">
+                    <a href="tel:${cita.telefono}" class="flex-button">
                       <i class="fas fa-phone"></i>
                     </a>
-                    <a href="https://wa.me/${cita.telefono}" class="modern-button">
+                    <a href="https://wa.me/${cita.telefono}" class="flex-button">
                       <i class="fab fa-whatsapp"></i>
                     </a>
                   </div>

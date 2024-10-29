@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="16b52d5e-899e-4204-8668-7bbfdf15b2b1" name="Changes" comment="confirmacion citas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/peluqueria.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/peluqueria.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/galeria1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/galeria1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/panel1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel1.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -484,7 +482,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730195200939</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="confirmacion citas">
+      <option name="closed" value="true" />
+      <created>1730195210191</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1730195210191</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
