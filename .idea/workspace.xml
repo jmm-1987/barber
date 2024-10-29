@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16b52d5e-899e-4204-8668-7bbfdf15b2b1" name="Changes" comment="confirmacion citas">
-      <change beforePath="$PROJECT_DIR$/templates/confirm1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/confirm1.html" afterDir="false" />
-    </list>
+    <list default="true" id="16b52d5e-899e-4204-8668-7bbfdf15b2b1" name="Changes" comment="confirmacion citas" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -457,7 +455,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730192596036</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="confirmacion citas">
+      <option name="closed" value="true" />
+      <created>1730192831674</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1730192831674</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
