@@ -72,7 +72,7 @@
             text-align: left;
         }
 
-        .details-box h2 {
+        .details-box h2, h3 {
             font-size: 24px;
             margin-bottom: 10px;
             text-align: center;
@@ -83,39 +83,45 @@
             margin: 5px 0;
         }
 
-        .modern-button {
-            font-family: 'Cinzel', serif;
-            background-color: #000000;
-            color: #ffffff;
-            border: 2px solid #000000;
-            padding: 15px 40px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-            margin-top: 20px;
-        }
-
-        .modern-button:hover {
-            background-color: #ffffff;
-            color: #000000;
-            border: 2px solid #000000;
-        }
-
         .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            justify-content: center;
-            width: 100%;
-            max-width: 400px;
-            margin-top: 20px;
-        }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.top-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.modern-button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Cinzel', serif;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+    font-weight: bold;
+    border-radius: 50px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.whatsapp-button {
+    background-color: #25D366; /* Verde de WhatsApp */
+    color: white;
+}
+
+.whatsapp-button:hover {
+    background-color: #1ebe57; /* Un tono ligeramente más oscuro para el hover */
+}
+
 
         .footer {
             margin-top: 40px;
@@ -145,13 +151,18 @@
             <p><strong>Teléfono:</strong> <span id="telefono"></span></p>
             <p><strong>Fecha:</strong> <span id="fecha"></span></p>
             <p><strong>Hora:</strong> <span id="hora"></span></p>
+            <h3>Te esperamos!</h3>
         </div>
 
         <!-- Botones de acción -->
         <section class="buttons-container">
-            <button class="modern-button" id="whatsappButton">Enviar a mi WhatsApp</button>
-            <button class="modern-button" onclick="window.location.href = '/modelo1'">Aceptar</button>
-        </section>
+    <div class="top-buttons">
+        <button class="modern-button" onclick="guardarCaptura()">Guardar Pantalla</button>
+        <button class="modern-button whatsapp-button" id="whatsappButton">Enviar a mi WhatsApp</button>
+    </div>
+    <button class="modern-button" onclick="window.location.href = '/modelo1'">Aceptar</button>
+</section>
+
 
         <footer class="footer">
             <div class="image-container">
@@ -191,6 +202,17 @@
         const whatsappURL = `https://wa.me/${telefono.replace(/\s+/g, '')}?text=${encodeURIComponent(mensaje)}`;
         window.open(whatsappURL, '_blank');
     };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    function guardarCaptura() {
+        html2canvas(document.querySelector(".details-box")).then(canvas => {
+            const link = document.createElement("a");
+            link.href = canvas.toDataURL("image/png");
+            link.download = "confirmacion_cita.png";
+            link.click();
+        });
+    }
 </script>
 
 </body>

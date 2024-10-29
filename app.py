@@ -189,7 +189,7 @@ def available_hours():
     horas_disponibles = [hora for hora in horas_trabajo if hora not in horas_ocupadas]
 
     # Devolver las horas disponibles
-    return jsonify({'available_hours': horas_disponibles, 'message': 'Horas disponibles' if horas_disponibles else 'No hay horas disponibles'})
+    return jsonify({'available_hours': horas_disponibles, 'message': 'Horas disponibles' if horas_disponibles else 'CERRADO'})
 
 @app.route('/horarios_dia', methods=['GET'])
 def horarios_dia():
