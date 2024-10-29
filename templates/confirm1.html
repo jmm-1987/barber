@@ -200,7 +200,7 @@
     document.getElementById("whatsappButton").onclick = function() {
         const mensaje = `Hola ${nombre}, tu cita ha sido confirmada para el ${fecha} a las ${hora}. ¡Te esperamos en la Barbería!`;
         const whatsappURL = `https://wa.me/${telefono.replace(/\s+/g, '')}?text=${encodeURIComponent(mensaje)}`;
-        window.open(whatsappURL, '_blank');
+        window.open(whatsappURL, '_self');
     };
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
