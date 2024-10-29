@@ -42,14 +42,37 @@
         flex-grow: 1;
       }
 
-      .header h1 {
-        font-size: 40px;
-        font-weight: bold;
-        color: #000000;
-        margin-bottom: 30px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-      }
+      /* Estilo del título con efecto escritura */
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 48px;
+            font-weight: bold;
+            color: #000000;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0; /* Inicialmente el ancho es 0 */
+            animation: typing 3s steps(30) forwards;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: black; }
+        }
+
+        .logo img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 40px;
+            filter: grayscale(100%);
+        }
 
       .form-input {
         background-color: #f5f5f5;
@@ -137,7 +160,7 @@
       }
 
       /* Marcar el domingo en rojo */
-      .pika-table th:nth-child(1) {
+      .pika-table th:nth-child(7) {
         color: red;
       }
     </style>
@@ -145,8 +168,12 @@
   <body>
     <div class="container">
       <header class="header">
-        <h1>Barber Shop</h1>
-      </header>
+            <h1 id="typed-title">Barber Shop</h1>
+        </header>
+
+        <div class="logo">
+            <img src="static/logo1.png" alt="Barber Logo">
+        </div>
 
       <div class="logo">
         <input
@@ -201,17 +228,17 @@
                 const citaElement = document.createElement("div");
                 citaElement.className = "cita-element cita-reservada";
                 citaElement.innerHTML = `
-                  <p><strong>ID:</strong> ${cita.id}</p>
+                  <p><strong>Hora: ${cita.hora}</strong></p>
                   <p><strong>Nombre:</strong> ${cita.usuario}</p>
                   <p><strong>Teléfono:</strong> ${cita.telefono}</p>
                   <p><strong>Fecha:</strong> ${cita.fecha}</p>
-                  <p><strong>Hora:</strong> ${cita.hora}</p>
+                  <p><strong>ID:</strong> ${cita.id}</p>
                   <div class="button-container">
                     <button class="modern-button cancelarCitaBtn" data-id="${cita.id}">Cancelar</button>
-                    <a href="tel:${cita.telefono}" class="flex-button">
+                    <a href="tel:${cita.telefono}" class="modern-button">
                       <i class="fas fa-phone"></i>
                     </a>
-                    <a href="https://wa.me/${cita.telefono}" class="flex-button">
+                    <a href="https://wa.me/${cita.telefono}" class="modern-button">
                       <i class="fab fa-whatsapp"></i>
                     </a>
                   </div>

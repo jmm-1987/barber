@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16b52d5e-899e-4204-8668-7bbfdf15b2b1" name="Changes" comment="confirmacion citas" />
+    <list default="true" id="16b52d5e-899e-4204-8668-7bbfdf15b2b1" name="Changes" comment="confirmacion citas">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/peluqueria.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/peluqueria.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/galeria1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/galeria1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/panel1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/panel1.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -463,7 +468,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730192831674</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="confirmacion citas">
+      <option name="closed" value="true" />
+      <created>1730193233252</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1730193233252</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

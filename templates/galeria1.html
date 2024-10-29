@@ -18,9 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        /* -------------------------
-           Estilos generales (comunes para todas las pantallas)
-        ------------------------- */
+        /* Estilos generales */
         * {
             margin: 0;
             padding: 0;
@@ -29,8 +27,8 @@
         }
 
         body {
-            background-color: #ffffff; /* Fondo blanco moderno */
-            color: #000000; /* Texto en negro */
+            background-color: #ffffff;
+            color: #000000;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -39,25 +37,35 @@
         .container {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             padding: 20px;
             flex-grow: 1;
-            text-align: center; /* Centra el texto dentro del contenedor */
+            text-align: center;
         }
 
         .header {
-            margin-bottom: 30px; /* Reducir margen inferior */
+            margin-bottom: 30px;
         }
 
         .header h1 {
-            font-family: 'Cinzel', serif; /* Fuente vintage estilo barbería */
+            font-family: 'Cinzel', serif;
             font-size: 48px;
             font-weight: bold;
-            color: #000000; /* Texto en negro */
+            color: #000000;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-top: 10px; /* Reducir margen superior */
+            margin-top: 10px;
+        }
+
+        .logo {
+            margin-bottom: 40px;
+        }
+
+        .logo img {
+            width: 120px;
+            height: auto;
+            filter: grayscale(100%);
         }
 
         .gallery {
@@ -74,50 +82,35 @@
             object-fit: cover;
             border: 2px solid #000000;
             transition: transform 0.3s ease, filter 0.3s ease;
-            filter: grayscale(100%); /* Estilo blanco y negro */
+            filter: grayscale(100%);
         }
 
         .gallery img:hover {
             transform: scale(1.05);
-            filter: grayscale(0%); /* Eliminar blanco y negro al pasar el ratón */
+            filter: grayscale(0%);
         }
 
         .footer {
-            position: relative;
-            width: 100%;
-        }
-
-        .stripe-bar {
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #000000 50%, #ffffff 50%);
-            margin-top: 40px;
-        }
-
-        .image-container {
             width: 100%;
             text-align: center;
-            position: relative;
-            margin-top: 20px;
+            margin-top: 40px;
         }
 
         .image-container img {
             width: 100%;
-            max-width: 600px; /* Ajustar el tamaño máximo de la imagen */
+            max-width: 600px;
             height: auto;
         }
 
-        a {
-            text-decoration: none;
-        }
-
-        /* -------------------------
-           Estilos para pantallas grandes (a partir de 768px)
-        ------------------------- */
+        /* Estilos para pantallas grandes */
         @media (min-width: 768px) {
             .header h1 {
-                font-size: 56px; /* Tamaño de texto mayor para pantallas grandes */
+                font-size: 56px;
                 margin-top: 20px;
+            }
+
+            .logo img {
+                width: 150px;
             }
 
             .gallery img {
@@ -126,16 +119,14 @@
             }
 
             .container {
-                padding: 40px; /* Aumentar padding en pantallas grandes */
+                padding: 40px;
             }
         }
 
-        /* -------------------------
-           Estilos para pantallas pequeñas (móviles)
-        ------------------------- */
+        /* Estilos para pantallas pequeñas */
         @media (max-width: 767px) {
             .header h1 {
-                font-size: 36px; /* Tamaño de texto más pequeño en pantallas pequeñas */
+                font-size: 36px;
             }
 
             .gallery img {
@@ -144,10 +135,13 @@
             }
 
             .container {
-                padding: 10px; /* Menor padding en pantallas pequeñas */
+                padding: 10px;
+            }
+
+            .logo img {
+                width: 100px;
             }
         }
-
     </style>
 </head>
 <body>
@@ -155,6 +149,10 @@
         <header class="header">
             <h1>Galería Barber Shop</h1>
         </header>
+
+        <div class="logo">
+            <img src="static/logo1.png" alt="Barber Logo">
+        </div>
 
         <section class="gallery">
             <img src="static/galeria/g1.webp" alt="Foto 1">
@@ -166,7 +164,6 @@
         </section>
 
         <footer class="footer">
-            <!-- Imagen en la parte baja de la página -->
             <div class="image-container">
                 <img src="static/footer.PNG" alt="footer">
             </div>
